@@ -1622,6 +1622,21 @@ const exerciseNextButton = document.querySelector("[data-exercise-next]");
 const demoToggleButton = document.querySelector("[data-demo-toggle]");
 const demoSpeedButtons = document.querySelectorAll("[data-demo-speed]");
 const exerciseCloseButtons = document.querySelectorAll("[data-exercise-close]");
+const profileStatus = document.getElementById("profileStatus");
+const authOpenButton = document.querySelector("[data-auth-open]");
+const profileLogoutButton = document.querySelector("[data-profile-logout]");
+const profilePlanSummary = document.getElementById("profilePlanSummary");
+const authModal = document.getElementById("authModal");
+const authTitle = document.getElementById("authTitle");
+const authLead = document.getElementById("authLead");
+const authMessage = document.getElementById("authMessage");
+const authModeButtons = document.querySelectorAll("[data-auth-mode]");
+const authViews = document.querySelectorAll("[data-auth-view]");
+const authCloseButtons = document.querySelectorAll("[data-auth-close]");
+const authSkipButtons = document.querySelectorAll("[data-auth-skip]");
+const signupForm = document.querySelector("[data-signup-form]");
+const loginForm = document.querySelector("[data-login-form]");
+const setupForm = document.querySelector("[data-setup-form]");
 
 const rosterDays = [
   "monday",
@@ -1690,7 +1705,10 @@ const rosterDayMeta = {
 };
 
 const rosterStoragePrefix = "entenciti-roster-v1";
-const currentWeekStorageKey = "entenciti-current-week";
+const currentWeekStoragePrefix = "entenciti-current-week";
+const usersStorageKey = "entenciti-users-v1";
+const activeUserStorageKey = "entenciti-active-user-v1";
+const authPromptSessionKey = "entenciti-auth-prompt-dismissed";
 const homeClipDuration = 8000;
 
 let upcomingSession = null;
@@ -1708,6 +1726,10 @@ let isExerciseTimerRunning = false;
 let activeSetNumber = 1;
 let exerciseTimerEndsAt = 0;
 let activeExerciseGuide = null;
+let activeUser = null;
+let pendingProtectedAction = null;
+let authIsRequired = false;
+let hasOpenedAuthModal = false;
 
 function escapeHtml(value) {
   return String(value)
@@ -1734,6 +1756,332 @@ function writeLocalStorage(key, value) {
   }
 }
 
+function removeLocalStorage(key) {
+  try {
+    window.localStorage.removeItem(key);
+  } catch (error) {
+    // Nothing to clear when storage is unavailable.
+  }
+}
+
+function readSessionStorage(key) {
+  try {
+    return window.sessionStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeSessionStorage(key, value) {
+  try {
+    window.sessionStorage.setItem(key, value);
+  } catch (error) {
+    // Session-only prompts can be repeated if storage is unavailable.
+  }
+}
+
+function readJsonStorage(key, fallback) {
+  const value = readLocalStorage(key);
+
+  if (!value) return fallback;
+
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeJsonStorage(key, value) {
+  writeLocalStorage(key, JSON.stringify(value));
+}
+
+function normalizeEmail(value) {
+  return String(value).trim().toLowerCase();
+}
+
+function createProfileId(email) {
+  return normalizeEmail(email).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function getUsers() {
+  return readJsonStorage(usersStorageKey, {});
+}
+
+function saveUsers(users) {
+  writeJsonStorage(usersStorageKey, users);
+}
+
+function getStoredActiveUser() {
+  const activeEmail = normalizeEmail(readLocalStorage(activeUserStorageKey) || "");
+  const users = getUsers();
+
+  return activeEmail && users[activeEmail] ? users[activeEmail] : null;
+}
+
+function getProfileScope() {
+  return activeUser ? `user-${activeUser.id}` : "guest";
+}
+
+function getCurrentWeekStorageKey() {
+  return `${currentWeekStoragePrefix}-${getProfileScope()}`;
+}
+
+function hasTrainingProfile() {
+  return Boolean(activeUser && activeUser.training && activeUser.training.completedAt);
+}
+
+function setAuthMessage(message, isError = false) {
+  if (!authMessage) return;
+
+  authMessage.textContent = message || "";
+  authMessage.classList.toggle("is-error", Boolean(isError));
+}
+
+function renderProfilePlanSummary() {
+  if (!profilePlanSummary) return;
+
+  if (!hasTrainingProfile()) {
+    profilePlanSummary.hidden = true;
+    profilePlanSummary.innerHTML = "";
+    return;
+  }
+
+  const training = activeUser.training;
+
+  profilePlanSummary.hidden = false;
+  profilePlanSummary.innerHTML = `
+    <div>
+      <span>Goal</span>
+      <strong>${escapeHtml(training.goal)}</strong>
+    </div>
+    <div>
+      <span>Commitment</span>
+      <strong>${escapeHtml(training.commitment)}</strong>
+    </div>
+    <div>
+      <span>Weekly Load</span>
+      <strong>${escapeHtml(training.sessionsPerWeek)} sessions</strong>
+    </div>
+    <div>
+      <span>Intensity</span>
+      <strong>${escapeHtml(training.intensity)}</strong>
+    </div>
+  `;
+}
+
+function renderProfileState() {
+  if (profileStatus) {
+    profileStatus.textContent = activeUser ? activeUser.name : "Guest";
+  }
+
+  if (authOpenButton) {
+    authOpenButton.textContent = activeUser ? "Profile" : "Sign up / Login";
+  }
+
+  if (profileLogoutButton) {
+    profileLogoutButton.hidden = !activeUser;
+  }
+
+  renderProfilePlanSummary();
+}
+
+function refreshAfterProfileChange() {
+  renderProfileState();
+  renderWorkout();
+  renderRoster();
+  renderUpcomingProgram();
+}
+
+function setActiveUserByEmail(email) {
+  const normalizedEmail = normalizeEmail(email);
+  const users = getUsers();
+
+  if (!normalizedEmail || !users[normalizedEmail]) {
+    activeUser = null;
+    removeLocalStorage(activeUserStorageKey);
+  } else {
+    activeUser = users[normalizedEmail];
+    writeLocalStorage(activeUserStorageKey, normalizedEmail);
+  }
+
+  if (rosterWeekSelect) {
+    rosterWeekSelect.value = String(
+      clampWeek(readLocalStorage(getCurrentWeekStorageKey()) || "1")
+    );
+  }
+
+  refreshAfterProfileChange();
+}
+
+function saveActiveUser(profile) {
+  const users = getUsers();
+
+  users[profile.email] = profile;
+  saveUsers(users);
+  setActiveUserByEmail(profile.email);
+}
+
+function setAuthMode(mode) {
+  if (!authModal) return;
+
+  const safeMode = mode === "setup" && !activeUser ? "signup" : mode;
+  const tabsShell = authModeButtons.length ? authModeButtons[0].parentElement : null;
+
+  authViews.forEach((view) => {
+    view.hidden = view.dataset.authView !== safeMode;
+  });
+
+  authModeButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.authMode === safeMode);
+  });
+
+  if (tabsShell) {
+    tabsShell.hidden = safeMode === "setup";
+  }
+
+  if (safeMode === "setup") {
+    if (authTitle) authTitle.textContent = "Set up your training";
+    if (authLead) {
+      authLead.textContent =
+        "Answer a few questions so this profile can open the workout plan.";
+    }
+    populateSetupForm();
+    return;
+  }
+
+  if (authTitle) authTitle.textContent = "Sign up or login";
+  if (authLead) {
+    authLead.textContent =
+      "Browse freely now, then save your profile before opening a workout or plan.";
+  }
+}
+
+function openAuthModal(mode = "signup", options = {}) {
+  if (!authModal) return;
+
+  authIsRequired = Boolean(options.required);
+  hasOpenedAuthModal = true;
+  authModal.hidden = false;
+  authModal.classList.toggle("is-required", authIsRequired);
+  document.body.classList.add("is-auth-open");
+  setAuthMode(mode);
+  setAuthMessage(options.message || "");
+
+  const firstInput = authModal.querySelector("[data-auth-view]:not([hidden]) input, [data-auth-view]:not([hidden]) textarea, [data-auth-view]:not([hidden]) select");
+
+  if (firstInput) {
+    firstInput.focus();
+  }
+}
+
+function closeAuthModal(rememberSkip = false) {
+  if (!authModal) return;
+
+  if (rememberSkip) {
+    writeSessionStorage(authPromptSessionKey, "true");
+  }
+
+  pendingProtectedAction = null;
+  authModal.hidden = true;
+  authModal.classList.remove("is-required");
+  authIsRequired = false;
+  document.body.classList.remove("is-auth-open");
+}
+
+function finishAuthFlow() {
+  const action = pendingProtectedAction;
+
+  pendingProtectedAction = null;
+
+  if (authModal) {
+    authModal.hidden = true;
+    authModal.classList.remove("is-required");
+  }
+
+  authIsRequired = false;
+  document.body.classList.remove("is-auth-open");
+  refreshAfterProfileChange();
+
+  if (action) {
+    action();
+  }
+}
+
+function requireTrainingProfile(action) {
+  if (hasTrainingProfile()) {
+    if (action) action();
+    return true;
+  }
+
+  pendingProtectedAction = typeof action === "function" ? action : null;
+  openAuthModal(activeUser ? "setup" : "signup", {
+    required: true,
+    message: activeUser
+      ? "Finish your training setup to open this plan."
+      : "Create or login to a profile before opening this plan."
+  });
+
+  return false;
+}
+
+function collectTrainingSetup(form) {
+  const formData = new FormData(form);
+  const medicalCondition = String(formData.get("medicalCondition") || "").trim();
+
+  return {
+    goal: String(formData.get("goal") || "").trim(),
+    commitment: String(formData.get("commitment") || ""),
+    sessionsPerWeek: String(formData.get("sessionsPerWeek") || ""),
+    experience: String(formData.get("experience") || ""),
+    intensity: String(formData.get("intensity") || ""),
+    age: String(formData.get("age") || ""),
+    height: String(formData.get("height") || ""),
+    weight: String(formData.get("weight") || ""),
+    medicalCondition: medicalCondition || "None",
+    completedAt: new Date().toISOString()
+  };
+}
+
+function populateSetupForm() {
+  if (!setupForm || !activeUser) return;
+
+  const training = activeUser.training || {};
+
+  Array.from(setupForm.elements).forEach((element) => {
+    if (!element.name || !(element.name in training)) return;
+
+    element.value = training[element.name];
+  });
+}
+
+function openProgramSection() {
+  const programSection = document.getElementById("program");
+
+  if (programSection) {
+    programSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function initializeAuth() {
+  activeUser = getStoredActiveUser();
+  renderProfileState();
+
+  if (!activeUser && !readSessionStorage(authPromptSessionKey)) {
+    window.setTimeout(() => {
+      if (
+        !activeUser &&
+        !hasOpenedAuthModal &&
+        authModal &&
+        authModal.hidden &&
+        !readSessionStorage(authPromptSessionKey)
+      ) {
+        openAuthModal("signup", { required: false });
+      }
+    }, 350);
+  }
+}
+
 function clampWeek(week) {
   const parsedWeek = Number.parseInt(week, 10);
 
@@ -1747,13 +2095,13 @@ function getCurrentRosterWeek() {
     return clampWeek(rosterWeekSelect.value);
   }
 
-  return clampWeek(readLocalStorage(currentWeekStorageKey) || "1");
+  return clampWeek(readLocalStorage(getCurrentWeekStorageKey()) || "1");
 }
 
 function setCurrentRosterWeek(week) {
   const safeWeek = clampWeek(week);
 
-  writeLocalStorage(currentWeekStorageKey, String(safeWeek));
+  writeLocalStorage(getCurrentWeekStorageKey(), String(safeWeek));
 
   if (rosterWeekSelect) {
     rosterWeekSelect.value = String(safeWeek);
@@ -1771,7 +2119,7 @@ function getPhaseKeyForWeek(week) {
 }
 
 function getRosterKey(week, dayKey) {
-  return `${rosterStoragePrefix}-week-${clampWeek(week)}-${dayKey}`;
+  return `${rosterStoragePrefix}-${getProfileScope()}-week-${clampWeek(week)}-${dayKey}`;
 }
 
 function isRosterComplete(week, dayKey) {
@@ -2152,6 +2500,25 @@ function renderWorkout() {
   const phase = workoutData[selectedPhase];
   const workout = phase && phase.days ? phase.days[selectedDay] : null;
 
+  if (!hasTrainingProfile()) {
+    phaseLabel.textContent = "Profile Required";
+    workoutTitle.textContent = "Set up your training profile";
+    workoutFocus.textContent =
+      "Sign up or login, answer your setup questions, then the full workout plan will open.";
+    workoutContent.innerHTML = `
+      <div class="profile-lock">
+        <span>Locked Plan</span>
+        <h4>Create your profile to open workouts.</h4>
+        <p>
+          Your profile stores your goal, commitment, weekly sessions, training
+          background, intensity, body stats, and medical notes for this plan.
+        </p>
+        <button type="button" data-profile-required-open>Set Up Profile</button>
+      </div>
+    `;
+    return;
+  }
+
   if (!phase || !workout) {
     workoutContent.innerHTML = `
       <div class="empty-state">
@@ -2529,6 +2896,165 @@ function goToExercise(offset) {
   });
 }
 
+initializeAuth();
+
+if (authOpenButton) {
+  authOpenButton.addEventListener("click", () => {
+    openAuthModal(activeUser ? "setup" : "signup", { required: false });
+  });
+}
+
+if (profileLogoutButton) {
+  profileLogoutButton.addEventListener("click", () => {
+    activeUser = null;
+    removeLocalStorage(activeUserStorageKey);
+
+    if (rosterWeekSelect) {
+      rosterWeekSelect.value = String(
+        clampWeek(readLocalStorage(getCurrentWeekStorageKey()) || "1")
+      );
+    }
+
+    refreshAfterProfileChange();
+  });
+}
+
+authModeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setAuthMode(button.dataset.authMode || "signup");
+    setAuthMessage("");
+  });
+});
+
+authCloseButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    closeAuthModal(!authIsRequired);
+  });
+});
+
+authSkipButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    closeAuthModal(true);
+  });
+});
+
+if (signupForm) {
+  signupForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(signupForm);
+    const email = normalizeEmail(formData.get("email"));
+    const name = String(formData.get("name") || "").trim();
+    const password = String(formData.get("password") || "");
+    const users = getUsers();
+
+    if (!email || !name || !password) {
+      setAuthMessage("Fill in your name, email, and password.", true);
+      return;
+    }
+
+    if (users[email]) {
+      setAuthMessage("That profile already exists. Login instead.", true);
+      setAuthMode("login");
+      return;
+    }
+
+    activeUser = {
+      id: createProfileId(email) || `profile-${Date.now()}`,
+      name,
+      email,
+      password,
+      training: null,
+      createdAt: new Date().toISOString()
+    };
+
+    users[email] = activeUser;
+    saveUsers(users);
+    writeLocalStorage(activeUserStorageKey, email);
+    renderProfileState();
+    setAuthMode("setup");
+    setAuthMessage("Profile created. Finish your training setup to proceed.");
+  });
+}
+
+if (loginForm) {
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(loginForm);
+    const email = normalizeEmail(formData.get("email"));
+    const password = String(formData.get("password") || "");
+    const users = getUsers();
+    const user = users[email];
+
+    if (!user || user.password !== password) {
+      setAuthMessage("Email or password does not match a saved profile.", true);
+      return;
+    }
+
+    activeUser = user;
+    writeLocalStorage(activeUserStorageKey, email);
+    refreshAfterProfileChange();
+
+    if (hasTrainingProfile()) {
+      finishAuthFlow();
+      return;
+    }
+
+    setAuthMode("setup");
+    setAuthMessage("Welcome back. Finish setup to open your plan.");
+  });
+}
+
+if (setupForm) {
+  setupForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!activeUser) {
+      setAuthMessage("Create or login to a profile first.", true);
+      setAuthMode("signup");
+      return;
+    }
+
+    activeUser = {
+      ...activeUser,
+      training: collectTrainingSetup(setupForm)
+    };
+
+    saveActiveUser(activeUser);
+    finishAuthFlow();
+  });
+}
+
+document.addEventListener(
+  "click",
+  (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const planLink = event.target.closest('a[href="#program"]');
+    const setupButton = event.target.closest("[data-profile-required-open]");
+
+    if (!planLink && !setupButton) return;
+
+    if (hasTrainingProfile()) {
+      if (setupButton) openProgramSection();
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    requireTrainingProfile(() => {
+      if (planLink === upcomingWorkoutLink) {
+        syncProgramToSession(upcomingSession);
+      }
+
+      openProgramSection();
+    });
+  },
+  true
+);
+
 if (phaseSelect && daySelect) {
   phaseSelect.addEventListener("change", renderWorkout);
   daySelect.addEventListener("change", renderWorkout);
@@ -2542,7 +3068,9 @@ if (workoutContent) {
 
     if (!trigger) return;
 
-    openExerciseDetailById(trigger.dataset.exerciseOpen);
+    requireTrainingProfile(() => {
+      openExerciseDetailById(trigger.dataset.exerciseOpen);
+    });
   });
 }
 
@@ -2812,11 +3340,22 @@ function renderRoster() {
   rosterGrid.querySelectorAll("[data-roster-day]").forEach((checkbox) => {
     checkbox.addEventListener("change", (event) => {
       const dayKey = event.currentTarget.dataset.rosterDay;
+      const desiredChecked = event.currentTarget.checked;
 
-      setRosterComplete(week, dayKey, event.currentTarget.checked);
+      if (!hasTrainingProfile()) {
+        event.currentTarget.checked = !desiredChecked;
+        requireTrainingProfile(() => {
+          setRosterComplete(week, dayKey, desiredChecked);
+          renderRoster();
+          renderUpcomingProgram();
+        });
+        return;
+      }
+
+      setRosterComplete(week, dayKey, desiredChecked);
       event.currentTarget
         .closest(".roster-card")
-        .classList.toggle("is-complete", event.currentTarget.checked);
+        .classList.toggle("is-complete", desiredChecked);
       updateRosterProgress(week);
       renderUpcomingProgram();
     });
@@ -2826,7 +3365,7 @@ function renderRoster() {
 }
 
 if (rosterWeekSelect) {
-  setCurrentRosterWeek(readLocalStorage(currentWeekStorageKey) || "1");
+  setCurrentRosterWeek(readLocalStorage(getCurrentWeekStorageKey()) || "1");
 
   rosterWeekSelect.addEventListener("change", () => {
     setCurrentRosterWeek(rosterWeekSelect.value);
@@ -2841,15 +3380,17 @@ if (homeCompleteButton) {
   homeCompleteButton.addEventListener("click", () => {
     if (!upcomingSession) return;
 
-    setCurrentRosterWeek(upcomingSession.week);
-    setRosterComplete(upcomingSession.week, upcomingSession.dayKey, true);
-    renderRoster();
-    renderUpcomingProgram();
+    requireTrainingProfile(() => {
+      setCurrentRosterWeek(upcomingSession.week);
+      setRosterComplete(upcomingSession.week, upcomingSession.dayKey, true);
+      renderRoster();
+      renderUpcomingProgram();
 
-    homeCompleteButton.textContent = "Checked";
-    window.setTimeout(() => {
-      homeCompleteButton.textContent = "Check Session";
-    }, 900);
+      homeCompleteButton.textContent = "Checked";
+      window.setTimeout(() => {
+        homeCompleteButton.textContent = "Check Session";
+      }, 900);
+    });
   });
 }
 

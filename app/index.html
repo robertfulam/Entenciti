@@ -19,10 +19,10 @@
 
   <title>INTENCITI | 8-Week Speed Program</title>
 
-  <link rel="icon" href="../images/running-icon.svg" type="image/svg+xml" sizes="any" />
+  <link rel="icon" href="./images/running-icon.svg" type="image/svg+xml" sizes="any" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="./styles/styles.css" />
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,7 +38,7 @@
     <nav class="navbar">
       <a href="#top" class="brand" aria-label="ENTENCITI Home">
         <span class="brand-mark" aria-hidden="true">
-          <img src="../images/running-icon.svg" alt="" />
+          <img src="./images/running-icon.svg" alt="" />
         </span>
         <span class="brand-text">ENTENCITI</span>
       </a>
@@ -63,6 +63,16 @@
         <li><a href="#testing">Testing</a></li>
         <li><a href="#rules">Rules</a></li>
       </ul>
+
+      <div class="profile-actions" aria-live="polite">
+        <span id="profileStatus">Guest</span>
+        <button class="profile-button" type="button" data-auth-open>
+          Sign up / Login
+        </button>
+        <button class="profile-button profile-button-secondary" type="button" data-profile-logout hidden>
+          Log out
+        </button>
+      </div>
     </nav>
 
     <section class="hero">
@@ -340,6 +350,8 @@
         </p>
       </div>
 
+      <div id="profilePlanSummary" class="profile-plan-summary" hidden></div>
+
       <div class="program-controls">
         <div class="control-group">
           <label for="phaseSelect">Select Phase</label>
@@ -610,6 +622,152 @@
     <p>ENTENCITI Speed Program</p>
     <a href="#top">Back to top ↑</a>
   </footer>
+
+  <section class="auth-modal" id="authModal" aria-labelledby="authTitle" hidden>
+    <div class="auth-backdrop" data-auth-close></div>
+
+    <article class="auth-shell" role="dialog" aria-modal="true">
+      <button class="auth-close" type="button" aria-label="Close profile dialog" data-auth-close>
+        &times;
+      </button>
+
+      <div class="auth-copy">
+        <p class="eyebrow">Training Profile</p>
+        <h2 id="authTitle">Sign up or login</h2>
+        <p id="authLead">
+          Browse freely now, then save your profile before opening a workout or plan.
+        </p>
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="Profile access">
+        <button class="is-active" type="button" data-auth-mode="signup">Sign up</button>
+        <button type="button" data-auth-mode="login">Login</button>
+      </div>
+
+      <div id="authMessage" class="auth-message" aria-live="polite"></div>
+
+      <form class="auth-form" data-auth-view="signup" data-signup-form>
+        <div class="auth-field-grid">
+          <label>
+            Name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+
+          <label>
+            Password
+            <input name="password" type="password" autocomplete="new-password" minlength="4" required />
+          </label>
+        </div>
+
+        <div class="auth-submit-row">
+          <button class="btn btn-primary" type="submit">Create Profile</button>
+          <button class="auth-skip" type="button" data-auth-skip>Continue Browsing</button>
+        </div>
+      </form>
+
+      <form class="auth-form" data-auth-view="login" data-login-form hidden>
+        <div class="auth-field-grid">
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required />
+          </label>
+
+          <label>
+            Password
+            <input name="password" type="password" autocomplete="current-password" required />
+          </label>
+        </div>
+
+        <div class="auth-submit-row">
+          <button class="btn btn-primary" type="submit">Login</button>
+          <button class="auth-skip" type="button" data-auth-skip>Continue Browsing</button>
+        </div>
+      </form>
+
+      <form class="auth-form training-setup-form" data-auth-view="setup" data-setup-form hidden>
+        <label class="auth-wide-field">
+          Why do you want this training goal?
+          <textarea name="goal" rows="3" required></textarea>
+        </label>
+
+        <div class="auth-field-grid auth-field-grid-compact">
+          <label>
+            Level of commitment
+            <select name="commitment" required>
+              <option value="">Select one</option>
+              <option value="Casual">Casual</option>
+              <option value="Steady">Steady</option>
+              <option value="Locked in">Locked in</option>
+              <option value="Competition prep">Competition prep</option>
+            </select>
+          </label>
+
+          <label>
+            Sessions per week
+            <select name="sessionsPerWeek" required>
+              <option value="">Select one</option>
+              <option value="2">2 sessions</option>
+              <option value="3">3 sessions</option>
+              <option value="4">4 sessions</option>
+              <option value="5">5 sessions</option>
+              <option value="6">6 sessions</option>
+            </select>
+          </label>
+
+          <label>
+            Previous workout experience
+            <select name="experience" required>
+              <option value="">Select one</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Some training">Some training</option>
+              <option value="Regular training">Regular training</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </label>
+
+          <label>
+            Intensity level
+            <select name="intensity" required>
+              <option value="">Select one</option>
+              <option value="Light">Light</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Hard">Hard</option>
+              <option value="Max effort">Max effort</option>
+            </select>
+          </label>
+
+          <label>
+            Age
+            <input name="age" type="number" min="13" max="90" required />
+          </label>
+
+          <label>
+            Height (cm)
+            <input name="height" type="number" min="100" max="250" required />
+          </label>
+
+          <label>
+            Weight (kg)
+            <input name="weight" type="number" min="30" max="250" required />
+          </label>
+        </div>
+
+        <label class="auth-wide-field">
+          Medical condition
+          <textarea name="medicalCondition" rows="3" placeholder="None"></textarea>
+        </label>
+
+        <div class="auth-submit-row">
+          <button class="btn btn-primary" type="submit">Proceed</button>
+        </div>
+      </form>
+    </article>
+  </section>
 
   <!-- JavaScript -->
   <script src="./script.js"></script>
