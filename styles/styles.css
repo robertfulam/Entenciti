@@ -1,0 +1,4186 @@
+:root {
+  --color-bg: #f8fafc;
+  --color-bg-alt: #eef2f7;
+  --color-dark: #07111f;
+  --color-dark-soft: #101b2d;
+  --color-primary: #06b6d4;
+  --color-primary-dark: #0891b2;
+  --color-accent: #22c55e;
+  --color-impact: #f97316;
+  --color-energy: #f59e0b;
+  --color-violet: #7c3aed;
+  --color-white: #ffffff;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-card: #ffffff;
+
+  --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 18px 50px rgba(15, 23, 42, 0.14);
+  --shadow-lg: 0 30px 80px rgba(15, 23, 42, 0.22);
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  --container: 1180px;
+  --transition: 180ms ease;
+}
+
+/* ================================
+   Reset
+================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--color-bg);
+  color: var(--color-dark);
+  line-height: 1.6;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ================================
+   Header / Navigation
+================================ */
+
+.site-header {
+  position: relative;
+  overflow: hidden;
+  color: var(--color-white);
+  background:
+    radial-gradient(circle at top right, rgba(6, 182, 212, 0.25), transparent 30%),
+    radial-gradient(circle at left, rgba(34, 197, 94, 0.16), transparent 28%),
+    linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%);
+}
+
+.navbar {
+  position: relative;
+  z-index: 10;
+  width: min(100% - 32px, var(--container));
+  margin: 0 auto;
+  padding: 22px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.brand-mark {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  background: var(--color-white);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.28);
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-text {
+  font-size: 1rem;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-menu a {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+
+.nav-menu a:hover {
+  color: var(--color-white);
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 5px auto;
+  border-radius: 999px;
+  background: var(--color-white);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav-toggle.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ================================
+   Hero
+================================ */
+
+.hero {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 32px, var(--container));
+  margin: 0 auto;
+  padding: 80px 0 110px;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.hero-content {
+  max-width: 760px;
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: var(--color-primary);
+  font-weight: 900;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(2.7rem, 6vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  font-weight: 900;
+}
+
+.hero-description {
+  max-width: 680px;
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 1.08rem;
+}
+
+.hero-actions {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 16px;
+  font-weight: 800;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #001018;
+  box-shadow: 0 16px 36px rgba(6, 182, 212, 0.35);
+}
+
+.btn-primary:hover {
+  background: #22d3ee;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.11);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero-card {
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(20px);
+}
+
+.hero-card-header,
+.hero-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hero-card-header p,
+.hero-card-footer p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+.hero-card-header span {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.16);
+  color: #86efac;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.profile-grid {
+  margin: 28px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.profile-grid div {
+  min-height: 130px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-grid strong {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.profile-grid span {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.upcoming-card {
+  display: grid;
+  gap: 18px;
+}
+
+.home-video {
+  margin-top: 6px;
+}
+
+.upcoming-details p {
+  color: var(--color-primary);
+  font-weight: 900;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.upcoming-details h2 {
+  margin-top: 8px;
+  color: var(--color-white);
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.upcoming-details span {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.94rem;
+}
+
+.upcoming-now {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.34);
+}
+
+.upcoming-now span {
+  display: block;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.upcoming-now strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-white);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.clip-timer {
+  min-width: 120px;
+  text-align: right;
+}
+
+.clip-timer > span {
+  color: #bae6fd;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-bar {
+  width: 120px;
+  height: 7px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.timer-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.upcoming-actions a {
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.quick-check-button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--color-accent);
+  color: #02130a;
+  cursor: pointer;
+  font-weight: 900;
+  transition:
+    transform var(--transition),
+    background var(--transition);
+}
+
+.quick-check-button:hover {
+  transform: translateY(-1px);
+  background: #4ade80;
+}
+
+/* ================================
+   Animated Exercise Clips
+================================ */
+
+.demo-clip {
+  --demo-bg: linear-gradient(160deg, #e0f2fe 0%, #f8fafc 58%, #dcfce7 100%);
+  position: relative;
+  width: 124px;
+  min-width: 124px;
+  height: 76px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 16px;
+  background: var(--demo-bg);
+  box-shadow: inset 0 -18px 34px rgba(15, 23, 42, 0.08);
+}
+
+.demo-clip--large {
+  width: 100%;
+  min-width: 0;
+  height: 236px;
+  border-radius: 24px;
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 -34px 70px rgba(15, 23, 42, 0.18),
+    0 18px 46px rgba(0, 0, 0, 0.18);
+}
+
+.demo-lane,
+.demo-ground,
+.demo-sky,
+.demo-shadow,
+.demo-distance-line,
+.demo-footprint,
+.demo-marker,
+.demo-equipment,
+.demo-band,
+.demo-ball,
+.demo-athlete,
+.demo-phase,
+.demo-label {
+  position: absolute;
+}
+
+.demo-sky {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.42), transparent 24% 76%, rgba(255, 255, 255, 0.32)),
+    radial-gradient(circle at 78% 20%, rgba(255, 255, 255, 0.72), transparent 0 8%, transparent 14%);
+  pointer-events: none;
+}
+
+.demo-lane {
+  inset: auto 10px 16px;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.18) 0 12px,
+    transparent 12px 20px
+  );
+}
+
+.demo-ground {
+  left: 10px;
+  right: 10px;
+  bottom: 17px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.22);
+}
+
+.demo-shadow {
+  left: 42%;
+  bottom: 15px;
+  z-index: 1;
+  width: 42px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.18);
+  filter: blur(1px);
+  transform: translateX(-50%);
+}
+
+.demo-distance-line {
+  display: none;
+  bottom: 18px;
+  width: 1px;
+  height: 38px;
+  border-left: 1px dashed rgba(15, 23, 42, 0.24);
+}
+
+.demo-distance-line-a {
+  left: 28%;
+}
+
+.demo-distance-line-b {
+  right: 28%;
+}
+
+.demo-footprint {
+  display: none;
+  bottom: 15px;
+  width: 13px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.demo-footprint-a {
+  left: 36%;
+  transform: rotate(-12deg);
+}
+
+.demo-footprint-b {
+  left: 54%;
+  transform: rotate(12deg);
+}
+
+.demo-label {
+  top: 7px;
+  left: 7px;
+  z-index: 4;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: #0f172a;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.demo-clip--large .demo-label {
+  top: 16px;
+  left: 16px;
+  padding: 7px 10px;
+  font-size: 0.72rem;
+}
+
+.demo-athlete {
+  left: 50%;
+  bottom: 20px;
+  z-index: 3;
+  width: 24px;
+  height: 44px;
+  transform-origin: 50% 100%;
+}
+
+.demo-clip--large .demo-athlete {
+  bottom: 52px;
+  width: 46px;
+  height: 82px;
+}
+
+.demo-head,
+.demo-body,
+.demo-arm,
+.demo-leg,
+.demo-shoe {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  background: #0f172a;
+}
+
+.demo-head {
+  top: 0;
+  left: 50%;
+  width: 34%;
+  aspect-ratio: 1;
+  border: 2px solid #0f172a;
+  background: linear-gradient(135deg, #f7c59f, #d9905d);
+  transform: translateX(-50%);
+}
+
+.demo-body {
+  top: 28%;
+  left: 50%;
+  width: 16%;
+  height: 36%;
+  background: linear-gradient(180deg, #0284c7, #075985);
+  transform: translateX(-50%) rotate(6deg);
+}
+
+.demo-arm,
+.demo-leg {
+  left: 50%;
+  width: 13%;
+  transform-origin: 50% 0;
+}
+
+.demo-arm {
+  top: 34%;
+  height: 32%;
+  background: linear-gradient(180deg, #f7c59f, #d9905d);
+}
+
+.demo-leg {
+  top: 61%;
+  height: 36%;
+  background: linear-gradient(180deg, #111827, #334155);
+}
+
+.demo-arm-a,
+.demo-leg-b {
+  transform: rotate(-36deg);
+}
+
+.demo-arm-b,
+.demo-leg-a {
+  transform: rotate(34deg);
+}
+
+.demo-shoe {
+  top: 95%;
+  left: 48%;
+  width: 26%;
+  height: 8%;
+  background: #ef4444;
+  transform-origin: 20% 50%;
+}
+
+.demo-shoe-a {
+  transform: translateX(-12px) rotate(-12deg);
+}
+
+.demo-shoe-b {
+  transform: translateX(8px) rotate(12deg);
+}
+
+.demo-phase {
+  display: none;
+  z-index: 5;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #0f172a;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.demo-phase-a {
+  left: 11%;
+  bottom: 18%;
+}
+
+.demo-phase-b {
+  left: 43%;
+  top: 13%;
+}
+
+.demo-phase-c {
+  right: 10%;
+  bottom: 18%;
+}
+
+.demo-marker {
+  display: none;
+  bottom: 19px;
+  width: 11px;
+  height: 13px;
+  background: var(--color-impact);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.demo-marker-a {
+  left: 18%;
+}
+
+.demo-marker-b {
+  right: 18%;
+}
+
+.demo-equipment,
+.demo-band,
+.demo-ball {
+  display: none;
+}
+
+.demo-equipment-a {
+  left: 24%;
+  right: 24%;
+  bottom: 50px;
+  height: 5px;
+  border-radius: 999px;
+  background: #111827;
+}
+
+.demo-equipment-a::before,
+.demo-equipment-a::after {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 14px;
+  border-radius: 4px;
+  background: #334155;
+  content: "";
+  transform: translateY(-50%);
+}
+
+.demo-equipment-a::before {
+  left: -8px;
+}
+
+.demo-equipment-a::after {
+  right: -8px;
+}
+
+.demo-equipment-b {
+  right: 16%;
+  bottom: 20px;
+  width: 26px;
+  height: 18px;
+  border-radius: 5px;
+  background: rgba(124, 58, 237, 0.85);
+}
+
+.demo-band {
+  left: 43%;
+  bottom: 25px;
+  width: 34px;
+  height: 12px;
+  border: 3px solid var(--color-violet);
+  border-radius: 999px;
+}
+
+.demo-ball {
+  right: 20%;
+  bottom: 22px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, #ffffff 0 18%, transparent 19%),
+    #111827;
+}
+
+.demo-clip--large .demo-equipment-a {
+  bottom: 108px;
+  height: 8px;
+}
+
+.demo-clip--large .demo-equipment-a::before,
+.demo-clip--large .demo-equipment-a::after {
+  width: 16px;
+  height: 24px;
+}
+
+.demo-clip--large .demo-equipment-b {
+  right: 18%;
+  bottom: 55px;
+  width: 56px;
+  height: 38px;
+}
+
+.demo-clip--large .demo-band {
+  bottom: 62px;
+  width: 72px;
+  height: 22px;
+  border-width: 5px;
+}
+
+.demo-clip--large .demo-ball {
+  bottom: 58px;
+  width: 26px;
+  height: 26px;
+}
+
+.demo-clip--detail {
+  min-height: 320px;
+  border-radius: 26px;
+}
+
+.demo-clip--detail .demo-ground {
+  left: 7%;
+  right: 7%;
+  bottom: 54px;
+  height: 5px;
+}
+
+.demo-clip--detail .demo-lane {
+  left: 7%;
+  right: 7%;
+  bottom: 70px;
+}
+
+.demo-clip--detail .demo-shadow {
+  bottom: 51px;
+  width: 88px;
+  height: 16px;
+}
+
+.demo-clip--detail .demo-distance-line,
+.demo-clip--detail .demo-footprint,
+.demo-clip--detail .demo-phase {
+  display: block;
+}
+
+.demo-clip--detail .demo-athlete {
+  width: 62px;
+  height: 112px;
+}
+
+.demo-clip--detail .demo-marker {
+  bottom: 56px;
+  width: 18px;
+  height: 22px;
+}
+
+.demo-clip--field {
+  --demo-bg: linear-gradient(160deg, #d9f99d 0%, #ecfeff 58%, #bbf7d0 100%);
+}
+
+.demo-clip--field .demo-marker,
+.demo-clip--field .demo-ball {
+  display: block;
+}
+
+.demo-clip--field .demo-athlete {
+  animation: fieldRun 1.35s linear infinite;
+}
+
+.demo-clip--field .demo-shadow,
+.demo-clip--field .demo-ball {
+  animation: fieldRun 1.35s linear infinite;
+}
+
+.demo-clip--field .demo-arm-a,
+.demo-clip--field .demo-leg-b,
+.demo-clip--plyo .demo-arm-a,
+.demo-clip--plyo .demo-leg-b {
+  animation: limbDriveA 420ms ease-in-out infinite alternate;
+}
+
+.demo-clip--field .demo-arm-b,
+.demo-clip--field .demo-leg-a,
+.demo-clip--plyo .demo-arm-b,
+.demo-clip--plyo .demo-leg-a {
+  animation: limbDriveB 420ms ease-in-out infinite alternate;
+}
+
+.demo-clip--gym {
+  --demo-bg: linear-gradient(160deg, #f1f5f9 0%, #fef3c7 100%);
+}
+
+.demo-clip--gym .demo-equipment-a,
+.demo-clip--gym .demo-equipment-b {
+  display: block;
+}
+
+.demo-clip--gym .demo-athlete {
+  animation: gymLift 1.45s ease-in-out infinite;
+}
+
+.demo-clip--gym .demo-equipment-a {
+  animation: gymBar 1.45s ease-in-out infinite;
+}
+
+.demo-clip--gym .demo-shadow {
+  animation: gymShadow 1.45s ease-in-out infinite;
+}
+
+.demo-clip--plyo {
+  --demo-bg: linear-gradient(160deg, #fef3c7 0%, #ffedd5 54%, #dbeafe 100%);
+}
+
+.demo-clip--plyo .demo-marker,
+.demo-clip--plyo .demo-equipment-b {
+  display: block;
+}
+
+.demo-clip--plyo .demo-athlete {
+  animation: plyoJump 1.1s cubic-bezier(0.3, 0.05, 0.2, 1) infinite;
+}
+
+.demo-clip--plyo .demo-shadow {
+  animation: plyoShadow 1.1s cubic-bezier(0.3, 0.05, 0.2, 1) infinite;
+}
+
+.demo-clip--tendon {
+  --demo-bg: linear-gradient(160deg, #ccfbf1 0%, #f8fafc 58%, #fde68a 100%);
+}
+
+.demo-clip--tendon .demo-athlete {
+  animation: tendonBounce 780ms ease-in-out infinite;
+}
+
+.demo-clip--tendon .demo-shadow {
+  animation: tendonShadow 780ms ease-in-out infinite;
+}
+
+.demo-clip--core {
+  --demo-bg: linear-gradient(160deg, #ede9fe 0%, #f8fafc 58%, #dbeafe 100%);
+}
+
+.demo-clip--core .demo-athlete {
+  left: 50%;
+  bottom: 29px;
+  width: 58px;
+  height: 24px;
+  animation: coreHold 1.5s ease-in-out infinite;
+}
+
+.demo-clip--core .demo-head {
+  top: 2px;
+  left: 88%;
+  width: 18%;
+}
+
+.demo-clip--core .demo-body {
+  top: 42%;
+  left: 45%;
+  width: 52%;
+  height: 16%;
+  transform: rotate(0);
+}
+
+.demo-clip--core .demo-arm {
+  top: 48%;
+  left: 72%;
+  width: 8%;
+  height: 36%;
+  transform: rotate(24deg);
+}
+
+.demo-clip--core .demo-leg {
+  top: 50%;
+  left: 18%;
+  width: 8%;
+  height: 42%;
+}
+
+.demo-clip--core .demo-leg-a {
+  transform: rotate(-76deg);
+}
+
+.demo-clip--core .demo-leg-b {
+  transform: rotate(-96deg);
+}
+
+.demo-clip--large.demo-clip--core .demo-athlete {
+  bottom: 82px;
+  width: 122px;
+  height: 48px;
+}
+
+.demo-clip--hip {
+  --demo-bg: linear-gradient(160deg, #fce7f3 0%, #f8fafc 58%, #dcfce7 100%);
+}
+
+.demo-clip--hip .demo-band {
+  display: block;
+}
+
+.demo-clip--hip .demo-athlete,
+.demo-clip--hip .demo-band {
+  animation: lateralStep 1.25s ease-in-out infinite;
+}
+
+.demo-clip--hip .demo-shadow {
+  animation: lateralShadow 1.25s ease-in-out infinite;
+}
+
+@keyframes clipProgress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fieldRun {
+  0% {
+    transform: translateX(-42px) rotate(-7deg);
+  }
+
+  50% {
+    transform: translateX(4px) rotate(5deg);
+  }
+
+  100% {
+    transform: translateX(42px) rotate(-7deg);
+  }
+}
+
+@keyframes limbDriveA {
+  from {
+    transform: rotate(-42deg);
+  }
+
+  to {
+    transform: rotate(42deg);
+  }
+}
+
+@keyframes limbDriveB {
+  from {
+    transform: rotate(40deg);
+  }
+
+  to {
+    transform: rotate(-40deg);
+  }
+}
+
+@keyframes gymLift {
+  0%,
+  100% {
+    transform: translate(-50%, 8px) scaleY(0.92);
+  }
+
+  50% {
+    transform: translate(-50%, -4px) scaleY(1);
+  }
+}
+
+@keyframes gymBar {
+  0%,
+  100% {
+    transform: translateY(8px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes gymShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(0.9);
+  }
+
+  50% {
+    transform: translateX(-50%) scaleX(1.08);
+  }
+}
+
+@keyframes plyoJump {
+  0%,
+  100% {
+    transform: translate(-50%, 4px) scaleY(0.9);
+  }
+
+  46% {
+    transform: translate(-50%, -22px) scaleY(1.04);
+  }
+}
+
+@keyframes plyoShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.24;
+  }
+
+  46% {
+    transform: translateX(-50%) scaleX(0.58);
+    opacity: 0.12;
+  }
+}
+
+@keyframes tendonBounce {
+  0%,
+  100% {
+    transform: translate(-50%, 5px);
+  }
+
+  50% {
+    transform: translate(-50%, -4px);
+  }
+}
+
+@keyframes tendonShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(0.92);
+  }
+
+  50% {
+    transform: translateX(-50%) scaleX(1.08);
+  }
+}
+
+@keyframes coreHold {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(1deg);
+  }
+}
+
+@keyframes lateralShadow {
+  0%,
+  100% {
+    transform: translateX(-24px) scaleX(0.92);
+  }
+
+  50% {
+    transform: translateX(24px) scaleX(1.05);
+  }
+}
+
+@keyframes lateralStep {
+  0%,
+  100% {
+    transform: translateX(-18px);
+  }
+
+  50% {
+    transform: translateX(18px);
+  }
+}
+
+/* More accurate exercise-specific demo motion */
+.demo-clip {
+  --travel: 34px;
+  --skin: #c87546;
+  --skin-light: #f2b184;
+  --kit: #075985;
+  --kit-dark: #082f49;
+  --shorts: #111827;
+  --shoe: #ef4444;
+  --joint: rgba(15, 23, 42, 0.28);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent 42%),
+    var(--demo-bg);
+}
+
+.demo-clip--large {
+  --travel: 76px;
+  border-radius: 22px;
+}
+
+.demo-clip--detail {
+  --travel: 112px;
+}
+
+.demo-sky {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 46%),
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.82), transparent 0 7%, transparent 13%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.28), transparent 28% 74%, rgba(255, 255, 255, 0.24));
+}
+
+.demo-lane {
+  left: 8%;
+  right: 8%;
+  bottom: 22%;
+  height: 1px;
+  opacity: 0.9;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.2) 0 18px,
+    transparent 18px 31px
+  );
+  transform: skewX(-8deg);
+}
+
+.demo-ground {
+  left: 7%;
+  right: 7%;
+  bottom: 20%;
+  height: 4px;
+  background:
+    linear-gradient(90deg, rgba(15, 23, 42, 0.18), rgba(15, 23, 42, 0.32), rgba(15, 23, 42, 0.18));
+}
+
+.demo-shadow {
+  left: 50%;
+  bottom: calc(20% - 2px);
+  z-index: 1;
+  width: 44px;
+  height: 9px;
+  opacity: 0.24;
+  background: rgba(15, 23, 42, 0.3);
+  filter: blur(2px);
+  transform: translateX(-50%);
+}
+
+.demo-clip--large .demo-shadow {
+  width: 92px;
+  height: 16px;
+}
+
+.demo-clip--detail .demo-ground {
+  bottom: 54px;
+}
+
+.demo-clip--detail .demo-lane {
+  bottom: 72px;
+}
+
+.demo-clip--detail .demo-shadow {
+  bottom: 52px;
+}
+
+.demo-athlete {
+  left: 50%;
+  bottom: 23%;
+  width: 30px;
+  height: 54px;
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+}
+
+.demo-clip--large .demo-athlete {
+  bottom: 26%;
+  width: 58px;
+  height: 108px;
+}
+
+.demo-clip--detail .demo-athlete {
+  bottom: 64px;
+  width: 72px;
+  height: 136px;
+}
+
+.demo-head,
+.demo-body,
+.demo-arm,
+.demo-leg,
+.demo-shoe {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.2);
+}
+
+.demo-head {
+  top: 0;
+  left: 50%;
+  width: 27%;
+  border: 0;
+  background:
+    radial-gradient(circle at 64% 40%, rgba(255, 255, 255, 0.32) 0 9%, transparent 10%),
+    linear-gradient(135deg, var(--skin-light), var(--skin));
+  transform: translateX(-50%);
+}
+
+.demo-head::before {
+  position: absolute;
+  inset: -7% -5% 55%;
+  border-radius: 999px 999px 50% 50%;
+  background: #1f2937;
+  content: "";
+}
+
+.demo-head::after {
+  position: absolute;
+  left: 38%;
+  bottom: -18%;
+  width: 24%;
+  height: 22%;
+  border-radius: 4px;
+  background: var(--skin);
+  content: "";
+}
+
+.demo-body {
+  top: 25%;
+  left: 50%;
+  width: 25%;
+  height: 38%;
+  border-radius: 45% 45% 34% 34%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.18), transparent 36%),
+    linear-gradient(180deg, var(--kit), var(--kit-dark));
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: 50% 88%;
+}
+
+.demo-body::after {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -18%;
+  height: 27%;
+  border-radius: 35% 35% 28% 28%;
+  background: var(--shorts);
+  content: "";
+}
+
+.demo-arm,
+.demo-leg {
+  left: 50%;
+  width: 8%;
+  overflow: visible;
+  transform-origin: 50% 8%;
+}
+
+.demo-arm {
+  top: 31%;
+  height: 24%;
+  background: linear-gradient(180deg, var(--skin-light), var(--skin));
+}
+
+.demo-arm::after,
+.demo-leg::after {
+  position: absolute;
+  left: 50%;
+  top: 82%;
+  width: 92%;
+  height: 80%;
+  border-radius: inherit;
+  background: inherit;
+  content: "";
+  transform: translateX(-50%) rotate(-18deg);
+  transform-origin: 50% 0;
+}
+
+.demo-leg {
+  top: 59%;
+  height: 25%;
+  background: linear-gradient(180deg, var(--shorts) 0 22%, var(--skin) 23% 100%);
+}
+
+.demo-leg::before {
+  position: absolute;
+  left: 50%;
+  top: 74%;
+  width: 130%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--joint);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.demo-leg::after {
+  top: 86%;
+  height: 92%;
+  background: linear-gradient(180deg, var(--skin), #a85f38);
+}
+
+.demo-arm-a {
+  transform: translateX(-50%) rotate(-32deg);
+}
+
+.demo-arm-b {
+  transform: translateX(-50%) rotate(32deg);
+}
+
+.demo-leg-a {
+  transform: translateX(-50%) rotate(28deg);
+}
+
+.demo-leg-b {
+  transform: translateX(-50%) rotate(-30deg);
+}
+
+.demo-shoe {
+  top: 98%;
+  left: 50%;
+  width: 30%;
+  height: 8%;
+  border-radius: 999px 35% 35% 999px;
+  background: linear-gradient(90deg, #b91c1c, var(--shoe));
+  transform-origin: 18% 50%;
+}
+
+.demo-shoe-a {
+  transform: translateX(-82%) rotate(-8deg);
+}
+
+.demo-shoe-b {
+  transform: translateX(14%) rotate(8deg);
+}
+
+.demo-clip:where([class*="demo-motion--"]) .demo-athlete,
+.demo-clip:where([class*="demo-motion--"]) .demo-shadow,
+.demo-clip:where([class*="demo-motion--"]) .demo-ball,
+.demo-clip:where([class*="demo-motion--"]) .demo-equipment-a,
+.demo-clip:where([class*="demo-motion--"]) .demo-equipment-b,
+.demo-clip:where([class*="demo-motion--"]) .demo-band,
+.demo-clip:where([class*="demo-motion--"]) .demo-arm-a,
+.demo-clip:where([class*="demo-motion--"]) .demo-arm-b,
+.demo-clip:where([class*="demo-motion--"]) .demo-leg-a,
+.demo-clip:where([class*="demo-motion--"]) .demo-leg-b,
+.demo-clip:where([class*="demo-motion--"]) .demo-shoe-a,
+.demo-clip:where([class*="demo-motion--"]) .demo-shoe-b {
+  animation: none;
+}
+
+.demo-clip--field {
+  --demo-bg:
+    linear-gradient(180deg, #bfdbfe 0%, #dbeafe 44%, #86efac 45%, #4ade80 100%);
+}
+
+.demo-clip--gym {
+  --demo-bg:
+    linear-gradient(180deg, #f8fafc 0%, #e2e8f0 52%, #cbd5e1 53%, #94a3b8 100%);
+}
+
+.demo-clip--plyo {
+  --demo-bg:
+    linear-gradient(180deg, #dbeafe 0%, #f8fafc 50%, #fde68a 51%, #f59e0b 100%);
+}
+
+.demo-clip--tendon {
+  --demo-bg:
+    linear-gradient(180deg, #cffafe 0%, #f8fafc 52%, #e2e8f0 53%, #cbd5e1 100%);
+}
+
+.demo-clip--core {
+  --demo-bg:
+    linear-gradient(180deg, #eef2ff 0%, #f8fafc 52%, #e0e7ff 53%, #c7d2fe 100%);
+}
+
+.demo-clip--hip {
+  --demo-bg:
+    linear-gradient(180deg, #fdf2f8 0%, #f8fafc 52%, #bbf7d0 53%, #86efac 100%);
+}
+
+.demo-clip--field .demo-ball,
+.demo-clip--gym .demo-ball,
+.demo-clip--plyo .demo-ball,
+.demo-clip--tendon .demo-ball,
+.demo-clip--core .demo-ball,
+.demo-clip--hip .demo-ball {
+  display: none;
+}
+
+.demo-clip--field .demo-marker {
+  display: block;
+}
+
+.demo-motion--accel .demo-athlete {
+  animation: accelTravel 1.18s cubic-bezier(0.24, 0.68, 0.22, 1) infinite;
+}
+
+.demo-motion--accel .demo-shadow {
+  animation: travelShadow 1.18s cubic-bezier(0.24, 0.68, 0.22, 1) infinite;
+}
+
+.demo-motion--accel .demo-body {
+  transform: translateX(-50%) rotate(-13deg);
+}
+
+.demo-motion--accel .demo-head {
+  transform: translateX(-45%) translateY(2%) rotate(8deg);
+}
+
+.demo-motion--accel .demo-arm-a,
+.demo-motion--sprint .demo-arm-a,
+.demo-motion--dribble .demo-arm-a {
+  animation: runArmA 520ms ease-in-out infinite;
+}
+
+.demo-motion--accel .demo-arm-b,
+.demo-motion--sprint .demo-arm-b,
+.demo-motion--dribble .demo-arm-b {
+  animation: runArmB 520ms ease-in-out infinite;
+}
+
+.demo-motion--accel .demo-leg-a,
+.demo-motion--sprint .demo-leg-a,
+.demo-motion--dribble .demo-leg-a {
+  animation: runLegA 520ms ease-in-out infinite;
+}
+
+.demo-motion--accel .demo-leg-b,
+.demo-motion--sprint .demo-leg-b,
+.demo-motion--dribble .demo-leg-b {
+  animation: runLegB 520ms ease-in-out infinite;
+}
+
+.demo-motion--accel .demo-shoe-a,
+.demo-motion--sprint .demo-shoe-a,
+.demo-motion--dribble .demo-shoe-a {
+  animation: runShoeA 520ms ease-in-out infinite;
+}
+
+.demo-motion--accel .demo-shoe-b,
+.demo-motion--sprint .demo-shoe-b,
+.demo-motion--dribble .demo-shoe-b {
+  animation: runShoeB 520ms ease-in-out infinite;
+}
+
+.demo-motion--sprint .demo-athlete {
+  animation: sprintTravel 1.05s linear infinite;
+}
+
+.demo-motion--sprint .demo-shadow {
+  animation: travelShadow 1.05s linear infinite;
+}
+
+.demo-motion--sprint .demo-body {
+  transform: translateX(-50%) rotate(3deg);
+}
+
+.demo-motion--cut .demo-athlete {
+  animation: cutPlant 1.45s cubic-bezier(0.42, 0, 0.2, 1) infinite;
+}
+
+.demo-motion--cut .demo-shadow {
+  animation: cutShadow 1.45s cubic-bezier(0.42, 0, 0.2, 1) infinite;
+}
+
+.demo-motion--cut .demo-body {
+  transform: translateX(-50%) rotate(-11deg);
+}
+
+.demo-motion--cut .demo-arm-a {
+  transform: translateX(-50%) rotate(58deg);
+}
+
+.demo-motion--cut .demo-arm-b {
+  transform: translateX(-50%) rotate(-42deg);
+}
+
+.demo-motion--cut .demo-leg-a {
+  animation: cutLeadLeg 1.45s ease-in-out infinite;
+}
+
+.demo-motion--cut .demo-leg-b {
+  animation: cutTrailLeg 1.45s ease-in-out infinite;
+}
+
+.demo-motion--dribble .demo-athlete {
+  animation: dribbleTravel 1.15s linear infinite;
+}
+
+.demo-motion--dribble .demo-shadow {
+  animation: travelShadow 1.15s linear infinite;
+}
+
+.demo-motion--dribble .demo-ball {
+  display: block;
+  right: auto;
+  left: 50%;
+  animation: dribbleBall 1.15s linear infinite;
+}
+
+.demo-clip--gym .demo-equipment-a {
+  display: block;
+}
+
+.demo-clip--gym .demo-equipment-b {
+  display: none;
+}
+
+.demo-motion--squat .demo-equipment-a,
+.demo-motion--clean .demo-equipment-a,
+.demo-motion--hinge .demo-equipment-a {
+  display: block;
+  left: 31%;
+  right: 31%;
+  height: 5px;
+}
+
+.demo-motion--squat .demo-equipment-a {
+  bottom: 46%;
+  animation: squatBar 1.65s ease-in-out infinite;
+}
+
+.demo-motion--squat .demo-athlete {
+  animation: squatRep 1.65s ease-in-out infinite;
+}
+
+.demo-motion--squat .demo-body {
+  transform: translateX(-50%) rotate(4deg);
+}
+
+.demo-motion--squat .demo-leg-a {
+  animation: squatLegA 1.65s ease-in-out infinite;
+}
+
+.demo-motion--squat .demo-leg-b {
+  animation: squatLegB 1.65s ease-in-out infinite;
+}
+
+.demo-motion--hinge .demo-equipment-a {
+  bottom: 26%;
+  animation: hingeBar 1.75s ease-in-out infinite;
+}
+
+.demo-motion--hinge .demo-athlete {
+  animation: hingeRep 1.75s ease-in-out infinite;
+}
+
+.demo-motion--hinge .demo-body {
+  transform: translateX(-50%) rotate(-34deg);
+}
+
+.demo-motion--hinge .demo-arm-a,
+.demo-motion--hinge .demo-arm-b {
+  transform: translateX(-50%) rotate(82deg);
+}
+
+.demo-motion--hinge .demo-leg-a {
+  transform: translateX(-50%) rotate(15deg);
+}
+
+.demo-motion--hinge .demo-leg-b {
+  transform: translateX(-50%) rotate(-12deg);
+}
+
+.demo-motion--hip-thrust .demo-equipment-b,
+.demo-motion--nordic .demo-equipment-b {
+  display: block;
+  left: 18%;
+  right: auto;
+  bottom: 25%;
+  width: 34%;
+  height: 17%;
+  border-radius: 6px;
+  background: #475569;
+}
+
+.demo-motion--hip-thrust .demo-athlete,
+.demo-motion--nordic .demo-athlete,
+.demo-motion--plank .demo-athlete,
+.demo-motion--side-plank .demo-athlete,
+.demo-motion--dead-bug .demo-athlete,
+.demo-motion--side-lying .demo-athlete,
+.demo-motion--copenhagen .demo-athlete,
+.demo-motion--bridge .demo-athlete {
+  bottom: 27%;
+  width: 66px;
+  height: 30px;
+}
+
+.demo-clip--large.demo-motion--hip-thrust .demo-athlete,
+.demo-clip--large.demo-motion--nordic .demo-athlete,
+.demo-clip--large.demo-motion--plank .demo-athlete,
+.demo-clip--large.demo-motion--side-plank .demo-athlete,
+.demo-clip--large.demo-motion--dead-bug .demo-athlete,
+.demo-clip--large.demo-motion--side-lying .demo-athlete,
+.demo-clip--large.demo-motion--copenhagen .demo-athlete,
+.demo-clip--large.demo-motion--bridge .demo-athlete {
+  width: 132px;
+  height: 60px;
+}
+
+.demo-clip--detail.demo-motion--hip-thrust .demo-athlete,
+.demo-clip--detail.demo-motion--nordic .demo-athlete,
+.demo-clip--detail.demo-motion--plank .demo-athlete,
+.demo-clip--detail.demo-motion--side-plank .demo-athlete,
+.demo-clip--detail.demo-motion--dead-bug .demo-athlete,
+.demo-clip--detail.demo-motion--side-lying .demo-athlete,
+.demo-clip--detail.demo-motion--copenhagen .demo-athlete,
+.demo-clip--detail.demo-motion--bridge .demo-athlete {
+  width: 162px;
+  height: 72px;
+}
+
+.demo-motion--hip-thrust .demo-athlete {
+  animation: hipThrustRep 1.5s ease-in-out infinite;
+}
+
+.demo-motion--hip-thrust .demo-shoe,
+.demo-motion--nordic .demo-shoe,
+.demo-motion--plank .demo-shoe,
+.demo-motion--side-plank .demo-shoe,
+.demo-motion--dead-bug .demo-shoe,
+.demo-motion--side-lying .demo-shoe,
+.demo-motion--copenhagen .demo-shoe,
+.demo-motion--bridge .demo-shoe {
+  display: none;
+}
+
+.demo-motion--hip-thrust .demo-head,
+.demo-motion--nordic .demo-head,
+.demo-motion--plank .demo-head,
+.demo-motion--side-plank .demo-head,
+.demo-motion--dead-bug .demo-head,
+.demo-motion--side-lying .demo-head,
+.demo-motion--copenhagen .demo-head,
+.demo-motion--bridge .demo-head {
+  top: 13%;
+  left: 86%;
+  width: 14%;
+}
+
+.demo-motion--hip-thrust .demo-body,
+.demo-motion--nordic .demo-body,
+.demo-motion--plank .demo-body,
+.demo-motion--side-plank .demo-body,
+.demo-motion--dead-bug .demo-body,
+.demo-motion--side-lying .demo-body,
+.demo-motion--copenhagen .demo-body,
+.demo-motion--bridge .demo-body {
+  top: 45%;
+  left: 50%;
+  width: 54%;
+  height: 16%;
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.demo-motion--hip-thrust .demo-arm,
+.demo-motion--nordic .demo-arm,
+.demo-motion--plank .demo-arm,
+.demo-motion--side-plank .demo-arm,
+.demo-motion--dead-bug .demo-arm,
+.demo-motion--side-lying .demo-arm,
+.demo-motion--copenhagen .demo-arm,
+.demo-motion--bridge .demo-arm {
+  top: 48%;
+  height: 30%;
+}
+
+.demo-motion--hip-thrust .demo-leg,
+.demo-motion--nordic .demo-leg,
+.demo-motion--plank .demo-leg,
+.demo-motion--side-plank .demo-leg,
+.demo-motion--dead-bug .demo-leg,
+.demo-motion--side-lying .demo-leg,
+.demo-motion--copenhagen .demo-leg,
+.demo-motion--bridge .demo-leg {
+  top: 49%;
+  height: 30%;
+}
+
+.demo-motion--hip-thrust .demo-leg-a,
+.demo-motion--bridge .demo-leg-a {
+  left: 31%;
+  transform: translateX(-50%) rotate(58deg);
+}
+
+.demo-motion--hip-thrust .demo-leg-b,
+.demo-motion--bridge .demo-leg-b {
+  left: 21%;
+  transform: translateX(-50%) rotate(100deg);
+}
+
+.demo-motion--hip-thrust .demo-arm-a,
+.demo-motion--hip-thrust .demo-arm-b,
+.demo-motion--bridge .demo-arm-a,
+.demo-motion--bridge .demo-arm-b {
+  left: 69%;
+  transform: translateX(-50%) rotate(70deg);
+}
+
+.demo-motion--split-squat .demo-equipment-a {
+  display: none;
+}
+
+.demo-motion--split-squat .demo-equipment-b {
+  display: block;
+  left: 24%;
+  right: auto;
+  bottom: 24%;
+  width: 10%;
+  height: 22%;
+  border-radius: 999px;
+  background: #334155;
+  box-shadow: 60px 0 0 #334155;
+}
+
+.demo-motion--split-squat .demo-athlete {
+  animation: splitSquatRep 1.55s ease-in-out infinite;
+}
+
+.demo-motion--split-squat .demo-leg-a {
+  transform: translateX(-50%) rotate(54deg);
+}
+
+.demo-motion--split-squat .demo-leg-b {
+  transform: translateX(-50%) rotate(-62deg);
+}
+
+.demo-motion--clean .demo-equipment-a {
+  bottom: 24%;
+  animation: cleanBar 1.35s cubic-bezier(0.28, 0, 0.22, 1) infinite;
+}
+
+.demo-motion--clean .demo-athlete {
+  animation: cleanAthlete 1.35s cubic-bezier(0.28, 0, 0.22, 1) infinite;
+}
+
+.demo-motion--clean .demo-body {
+  animation: cleanTorso 1.35s cubic-bezier(0.28, 0, 0.22, 1) infinite;
+}
+
+.demo-motion--nordic .demo-athlete {
+  animation: nordicLower 2s ease-in-out infinite;
+}
+
+.demo-motion--nordic .demo-leg-a,
+.demo-motion--nordic .demo-leg-b {
+  left: 24%;
+  transform: translateX(-50%) rotate(-90deg);
+}
+
+.demo-motion--lift .demo-athlete {
+  animation: liftRep 1.55s ease-in-out infinite;
+}
+
+.demo-clip--plyo .demo-marker,
+.demo-clip--plyo .demo-equipment-b {
+  display: none;
+}
+
+.demo-motion--pogo .demo-athlete {
+  animation: pogoRealistic 760ms ease-in-out infinite;
+}
+
+.demo-motion--pogo .demo-shadow {
+  animation: pogoShadow 760ms ease-in-out infinite;
+}
+
+.demo-motion--pogo .demo-body {
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.demo-motion--pogo .demo-leg-a,
+.demo-motion--pogo .demo-leg-b {
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.demo-motion--bound .demo-marker {
+  display: block;
+}
+
+.demo-motion--bound .demo-athlete {
+  animation: boundTravel 1.35s cubic-bezier(0.22, 0.74, 0.2, 1) infinite;
+}
+
+.demo-motion--bound .demo-shadow {
+  animation: boundShadow 1.35s cubic-bezier(0.22, 0.74, 0.2, 1) infinite;
+}
+
+.demo-motion--bound .demo-leg-a {
+  animation: boundLegA 1.35s ease-in-out infinite;
+}
+
+.demo-motion--bound .demo-leg-b {
+  animation: boundLegB 1.35s ease-in-out infinite;
+}
+
+.demo-motion--box-jump .demo-equipment-b {
+  display: block;
+  right: 20%;
+  bottom: 20%;
+  width: 26%;
+  height: 26%;
+  border-radius: 5px;
+  background: #475569;
+}
+
+.demo-motion--box-jump .demo-athlete {
+  animation: boxJumpAthlete 1.45s cubic-bezier(0.25, 0.72, 0.18, 1) infinite;
+}
+
+.demo-motion--box-jump .demo-shadow {
+  animation: boxJumpShadow 1.45s cubic-bezier(0.25, 0.72, 0.18, 1) infinite;
+}
+
+.demo-motion--jump .demo-athlete {
+  animation: verticalJumpRealistic 1.2s cubic-bezier(0.25, 0.72, 0.18, 1) infinite;
+}
+
+.demo-motion--calf-raise .demo-athlete,
+.demo-motion--calf-hold .demo-athlete,
+.demo-motion--eccentric-calf .demo-athlete {
+  left: 52%;
+}
+
+.demo-motion--calf-raise .demo-athlete {
+  animation: calfRaiseRep 1.35s ease-in-out infinite;
+}
+
+.demo-motion--calf-hold .demo-athlete {
+  animation: calfHoldRep 1.4s ease-in-out infinite;
+}
+
+.demo-motion--eccentric-calf .demo-athlete {
+  animation: eccentricCalfRep 2s ease-in-out infinite;
+}
+
+.demo-motion--calf-raise .demo-leg-a,
+.demo-motion--calf-raise .demo-leg-b,
+.demo-motion--calf-hold .demo-leg-a,
+.demo-motion--calf-hold .demo-leg-b,
+.demo-motion--eccentric-calf .demo-leg-a,
+.demo-motion--eccentric-calf .demo-leg-b {
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.demo-motion--calf-raise .demo-shoe-a,
+.demo-motion--calf-raise .demo-shoe-b,
+.demo-motion--calf-hold .demo-shoe-a,
+.demo-motion--calf-hold .demo-shoe-b,
+.demo-motion--eccentric-calf .demo-shoe-a,
+.demo-motion--eccentric-calf .demo-shoe-b {
+  animation: heelRise 1.35s ease-in-out infinite;
+}
+
+.demo-motion--tibialis .demo-distance-line-a {
+  display: block;
+  left: 28%;
+  bottom: 20%;
+  height: 50%;
+  border-left-style: solid;
+}
+
+.demo-motion--tibialis .demo-athlete {
+  left: 44%;
+  animation: tibialisRep 1.35s ease-in-out infinite;
+}
+
+.demo-motion--tibialis .demo-body {
+  transform: translateX(-50%) rotate(-8deg);
+}
+
+.demo-motion--tibialis .demo-shoe-a,
+.demo-motion--tibialis .demo-shoe-b {
+  animation: toeLift 1.35s ease-in-out infinite;
+}
+
+.demo-motion--plank .demo-athlete,
+.demo-motion--side-plank .demo-athlete {
+  animation: breathingHold 1.8s ease-in-out infinite;
+}
+
+.demo-motion--plank .demo-arm-a,
+.demo-motion--plank .demo-arm-b,
+.demo-motion--side-plank .demo-arm-a,
+.demo-motion--side-plank .demo-arm-b {
+  left: 73%;
+  transform: translateX(-50%) rotate(66deg);
+}
+
+.demo-motion--plank .demo-leg-a,
+.demo-motion--plank .demo-leg-b,
+.demo-motion--side-plank .demo-leg-a,
+.demo-motion--side-plank .demo-leg-b {
+  left: 18%;
+  transform: translateX(-50%) rotate(-88deg);
+}
+
+.demo-motion--dead-bug .demo-athlete {
+  animation: deadBugBody 1.7s ease-in-out infinite;
+}
+
+.demo-motion--dead-bug .demo-arm-a {
+  animation: deadBugArmA 1.7s ease-in-out infinite;
+}
+
+.demo-motion--dead-bug .demo-arm-b {
+  animation: deadBugArmB 1.7s ease-in-out infinite;
+}
+
+.demo-motion--dead-bug .demo-leg-a {
+  animation: deadBugLegA 1.7s ease-in-out infinite;
+}
+
+.demo-motion--dead-bug .demo-leg-b {
+  animation: deadBugLegB 1.7s ease-in-out infinite;
+}
+
+.demo-motion--pallof .demo-band {
+  display: block;
+  left: 16%;
+  bottom: 58%;
+  width: 36%;
+  height: 2px;
+  border: 0;
+  background: var(--color-violet);
+  animation: pallofBand 1.35s ease-in-out infinite;
+}
+
+.demo-motion--pallof .demo-athlete {
+  left: 64%;
+  animation: pallofPress 1.35s ease-in-out infinite;
+}
+
+.demo-motion--pallof .demo-arm-a,
+.demo-motion--pallof .demo-arm-b {
+  transform: translateX(-50%) rotate(78deg);
+}
+
+.demo-motion--crawl .demo-athlete {
+  bottom: 24%;
+  width: 62px;
+  height: 36px;
+  animation: crawlBody 1.35s ease-in-out infinite;
+}
+
+.demo-motion--crawl .demo-body {
+  top: 40%;
+  left: 50%;
+  width: 54%;
+  height: 16%;
+  transform: translateX(-50%);
+}
+
+.demo-motion--crawl .demo-head {
+  top: 18%;
+  left: 78%;
+  width: 15%;
+}
+
+.demo-motion--crawl .demo-arm-a,
+.demo-motion--crawl .demo-leg-b {
+  animation: crawlLimbA 1.35s ease-in-out infinite;
+}
+
+.demo-motion--crawl .demo-arm-b,
+.demo-motion--crawl .demo-leg-a {
+  animation: crawlLimbB 1.35s ease-in-out infinite;
+}
+
+.demo-motion--knee-raise .demo-equipment-a {
+  display: block;
+  left: 32%;
+  right: 32%;
+  bottom: 78%;
+}
+
+.demo-motion--knee-raise .demo-athlete {
+  top: 18%;
+  bottom: auto;
+  animation: hangingKneeRaise 1.45s ease-in-out infinite;
+}
+
+.demo-motion--knee-raise .demo-arm-a,
+.demo-motion--knee-raise .demo-arm-b {
+  transform: translateX(-50%) rotate(178deg);
+}
+
+.demo-motion--knee-raise .demo-leg-a,
+.demo-motion--knee-raise .demo-leg-b {
+  animation: kneeRaiseLeg 1.45s ease-in-out infinite;
+}
+
+.demo-motion--carry .demo-equipment-b {
+  display: block;
+  left: 35%;
+  right: auto;
+  bottom: 33%;
+  width: 9px;
+  height: 14px;
+  border-radius: 3px;
+  background: #334155;
+  box-shadow: 30px 0 0 #334155;
+}
+
+.demo-motion--carry .demo-athlete,
+.demo-motion--carry .demo-equipment-b {
+  animation: carryWalk 1.15s ease-in-out infinite;
+}
+
+.demo-motion--lateral-band .demo-band {
+  display: block;
+  left: 50%;
+  margin-left: -32px;
+  bottom: 26%;
+  width: 64px;
+  height: 16px;
+  animation: lateralBandStep 1.25s ease-in-out infinite;
+}
+
+.demo-motion--lateral-band .demo-athlete {
+  animation: lateralBandStep 1.25s ease-in-out infinite;
+}
+
+.demo-motion--lateral-band .demo-shadow {
+  animation: lateralBandShadow 1.25s ease-in-out infinite;
+}
+
+.demo-motion--side-lying .demo-athlete {
+  animation: sideLyingBody 1.55s ease-in-out infinite;
+}
+
+.demo-motion--side-lying .demo-leg-a {
+  animation: sideLegLift 1.55s ease-in-out infinite;
+}
+
+.demo-motion--copenhagen .demo-equipment-b {
+  display: block;
+  left: 54%;
+  right: auto;
+  bottom: 31%;
+  width: 28%;
+  height: 13%;
+  border-radius: 6px;
+  background: #64748b;
+}
+
+.demo-motion--copenhagen .demo-athlete {
+  animation: copenhagenHold 1.8s ease-in-out infinite;
+}
+
+.demo-motion--balance-reach .demo-athlete {
+  animation: balanceReach 1.65s ease-in-out infinite;
+}
+
+.demo-motion--balance-reach .demo-body {
+  transform: translateX(-50%) rotate(-22deg);
+}
+
+.demo-motion--balance-reach .demo-leg-a {
+  transform: translateX(-50%) rotate(4deg);
+}
+
+.demo-motion--balance-reach .demo-leg-b {
+  transform: translateX(-50%) rotate(-86deg);
+}
+
+.demo-motion--lateral-lunge .demo-athlete {
+  animation: lateralLunge 1.55s ease-in-out infinite;
+}
+
+.demo-motion--lateral-lunge .demo-leg-a {
+  transform: translateX(-50%) rotate(66deg);
+}
+
+.demo-motion--lateral-lunge .demo-leg-b {
+  transform: translateX(-50%) rotate(-16deg);
+}
+
+.demo-motion--bridge .demo-athlete {
+  animation: hipThrustRep 1.55s ease-in-out infinite;
+}
+
+.demo-motion--mobility .demo-athlete {
+  animation: mobilityRock 1.85s ease-in-out infinite;
+}
+
+.demo-motion--mobility .demo-body {
+  transform: translateX(-50%) rotate(-18deg);
+}
+
+.demo-motion--mobility .demo-leg-a {
+  transform: translateX(-50%) rotate(58deg);
+}
+
+.demo-motion--mobility .demo-leg-b {
+  transform: translateX(-50%) rotate(-34deg);
+}
+
+@keyframes accelTravel {
+  0% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -1)) translateY(4px) rotate(-14deg);
+  }
+
+  45% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.18)) translateY(0) rotate(-10deg);
+  }
+
+  100% {
+    transform: translateX(-50%) translateX(var(--travel)) translateY(-2px) rotate(-6deg);
+  }
+}
+
+@keyframes sprintTravel {
+  0% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -1)) translateY(0) rotate(2deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateX(0) translateY(-2px) rotate(1deg);
+  }
+
+  100% {
+    transform: translateX(-50%) translateX(var(--travel)) translateY(0) rotate(2deg);
+  }
+}
+
+@keyframes travelShadow {
+  0% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -1)) scaleX(0.88);
+  }
+
+  50% {
+    transform: translateX(-50%) translateX(0) scaleX(1.08);
+  }
+
+  100% {
+    transform: translateX(-50%) translateX(var(--travel)) scaleX(0.9);
+  }
+}
+
+@keyframes runArmA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(62deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-54deg);
+  }
+}
+
+@keyframes runArmB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-56deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(58deg);
+  }
+}
+
+@keyframes runLegA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-58deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(48deg);
+  }
+}
+
+@keyframes runLegB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(48deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-55deg);
+  }
+}
+
+@keyframes runShoeA {
+  0%,
+  100% {
+    transform: translateX(-116%) translateY(-4px) rotate(-25deg);
+  }
+
+  50% {
+    transform: translateX(30%) translateY(2px) rotate(8deg);
+  }
+}
+
+@keyframes runShoeB {
+  0%,
+  100% {
+    transform: translateX(34%) translateY(2px) rotate(8deg);
+  }
+
+  50% {
+    transform: translateX(-110%) translateY(-4px) rotate(-24deg);
+  }
+}
+
+@keyframes cutPlant {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.72)) rotate(7deg);
+  }
+
+  44% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.05)) translateY(5px) rotate(-18deg);
+  }
+
+  72% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.15)) translateY(0) rotate(12deg);
+  }
+}
+
+@keyframes cutShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.72)) scaleX(0.9);
+  }
+
+  44% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.05)) scaleX(1.25);
+  }
+
+  72% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.15)) scaleX(0.96);
+  }
+}
+
+@keyframes cutLeadLeg {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(48deg);
+  }
+
+  45% {
+    transform: translateX(-50%) rotate(78deg);
+  }
+}
+
+@keyframes cutTrailLeg {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-38deg);
+  }
+
+  45% {
+    transform: translateX(-50%) rotate(-72deg);
+  }
+}
+
+@keyframes dribbleTravel {
+  0% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.92)) rotate(-5deg);
+  }
+
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.92)) rotate(2deg);
+  }
+}
+
+@keyframes dribbleBall {
+  0% {
+    transform: translateX(calc(var(--travel) * -0.7)) translateY(1px) scale(1);
+  }
+
+  38% {
+    transform: translateX(calc(var(--travel) * -0.12)) translateY(-18px) scale(0.96);
+  }
+
+  76%,
+  100% {
+    transform: translateX(calc(var(--travel) * 0.8)) translateY(1px) scale(1);
+  }
+}
+
+@keyframes squatRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0) scaleY(1);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(9px) scaleY(0.94);
+  }
+}
+
+@keyframes squatBar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(9px);
+  }
+}
+
+@keyframes squatLegA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(23deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(58deg);
+  }
+}
+
+@keyframes squatLegB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-23deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-58deg);
+  }
+}
+
+@keyframes hingeRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(-4deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(7px) rotate(-16deg);
+  }
+}
+
+@keyframes hingeBar {
+  0%,
+  100% {
+    transform: translateY(-18px);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes hipThrustRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(7px) rotate(4deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-2px) rotate(0deg);
+  }
+}
+
+@keyframes splitSquatRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+@keyframes cleanBar {
+  0%,
+  100% {
+    transform: translateY(20px);
+  }
+
+  45% {
+    transform: translateY(-30px);
+  }
+
+  62% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes cleanAthlete {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(5px);
+  }
+
+  42% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+
+  66% {
+    transform: translateX(-50%) translateY(7px);
+  }
+}
+
+@keyframes cleanTorso {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-18deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+}
+
+@keyframes nordicLower {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(12deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-20deg);
+  }
+}
+
+@keyframes liftRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(6px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-4px);
+  }
+}
+
+@keyframes pogoRealistic {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(3px) scaleY(0.98);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-8px) scaleY(1.01);
+  }
+}
+
+@keyframes pogoShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1.06);
+    opacity: 0.28;
+  }
+
+  50% {
+    transform: translateX(-50%) scaleX(0.72);
+    opacity: 0.16;
+  }
+}
+
+@keyframes boundTravel {
+  0% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.86)) translateY(3px) rotate(-7deg);
+  }
+
+  48% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.1)) translateY(-26px) rotate(6deg);
+  }
+
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.86)) translateY(4px) rotate(-4deg);
+  }
+}
+
+@keyframes boundShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.75)) scaleX(1.05);
+  }
+
+  48% {
+    transform: translateX(-50%) translateX(0) scaleX(0.62);
+    opacity: 0.14;
+  }
+}
+
+@keyframes boundLegA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(62deg);
+  }
+
+  48% {
+    transform: translateX(-50%) rotate(-50deg);
+  }
+}
+
+@keyframes boundLegB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-60deg);
+  }
+
+  48% {
+    transform: translateX(-50%) rotate(46deg);
+  }
+}
+
+@keyframes boxJumpAthlete {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.45)) translateY(4px) scaleY(0.94);
+  }
+
+  45% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.08)) translateY(-34px) scaleY(1.02);
+  }
+
+  70% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * 0.48)) translateY(-10px) scaleY(0.96);
+  }
+}
+
+@keyframes boxJumpShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(calc(var(--travel) * -0.42)) scaleX(1.1);
+  }
+
+  45% {
+    transform: translateX(-50%) translateX(0) scaleX(0.58);
+  }
+}
+
+@keyframes verticalJumpRealistic {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(6px) scaleY(0.94);
+  }
+
+  45% {
+    transform: translateX(-50%) translateY(-24px) scaleY(1.02);
+  }
+}
+
+@keyframes calfRaiseRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(3px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
+@keyframes calfHoldRep {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+}
+
+@keyframes eccentricCalfRep {
+  0% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+
+  72% {
+    transform: translateX(-50%) translateY(4px);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+}
+
+@keyframes heelRise {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-18deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-2px) rotate(-28deg);
+  }
+}
+
+@keyframes tibialisRep {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-8deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-14deg);
+  }
+}
+
+@keyframes toeLift {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(7deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-18deg);
+  }
+}
+
+@keyframes breathingHold {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-1px) rotate(1deg);
+  }
+}
+
+@keyframes deadBugBody {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+}
+
+@keyframes deadBugArmA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-116deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-42deg);
+  }
+}
+
+@keyframes deadBugArmB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-42deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-116deg);
+  }
+}
+
+@keyframes deadBugLegA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(112deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(44deg);
+  }
+}
+
+@keyframes deadBugLegB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(44deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(112deg);
+  }
+}
+
+@keyframes pallofBand {
+  0%,
+  100% {
+    transform: scaleX(0.72);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pallofPress {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(-7px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateX(6px);
+  }
+}
+
+@keyframes crawlBody {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(-8px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateX(8px);
+  }
+}
+
+@keyframes crawlLimbA {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(62deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-42deg);
+  }
+}
+
+@keyframes crawlLimbB {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-42deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(62deg);
+  }
+}
+
+@keyframes hangingKneeRaise {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+@keyframes kneeRaiseLeg {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(8deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(72deg);
+  }
+}
+
+@keyframes carryWalk {
+  0%,
+  100% {
+    transform: translateX(-8px);
+  }
+
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+@keyframes lateralBandStep {
+  0%,
+  100% {
+    transform: translateX(-18px);
+  }
+
+  50% {
+    transform: translateX(18px);
+  }
+}
+
+@keyframes lateralBandShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(-18px) scaleX(0.92);
+  }
+
+  50% {
+    transform: translateX(-50%) translateX(18px) scaleX(1.08);
+  }
+}
+
+@keyframes sideLyingBody {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-1px);
+  }
+}
+
+@keyframes sideLegLift {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(-82deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-42deg);
+  }
+}
+
+@keyframes copenhagenHold {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(1deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-1deg);
+  }
+}
+
+@keyframes balanceReach {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(2px) rotate(-11deg);
+  }
+}
+
+@keyframes lateralLunge {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(-18px) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateX(18px) translateY(8px);
+  }
+}
+
+@keyframes mobilityRock {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(-50%) rotate(-6deg);
+  }
+}
+
+/* ================================
+   Sections
+================================ */
+
+.section {
+  width: min(100% - 32px, var(--container));
+  margin: 0 auto;
+  padding: 88px 0;
+}
+
+.section-alt {
+  width: 100%;
+  max-width: none;
+  padding-left: max(16px, calc((100% - var(--container)) / 2));
+  padding-right: max(16px, calc((100% - var(--container)) / 2));
+  background: var(--color-bg-alt);
+}
+
+.section-heading {
+  max-width: 780px;
+  margin-bottom: 38px;
+}
+
+.section-heading h2 {
+  color: var(--color-dark);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+}
+
+.section-heading p:not(.eyebrow) {
+  margin-top: 16px;
+  color: var(--color-muted);
+  font-size: 1.02rem;
+}
+
+/* ================================
+   Overview
+================================ */
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.feature-card {
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  background: #ecfeff;
+  font-size: 1.6rem;
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.feature-card p {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* ================================
+   Schedule
+================================ */
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px;
+}
+
+.day-card {
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.day-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.day-card span {
+  color: var(--color-primary-dark);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.day-card h3 {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.day-card p {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ================================
+   Roster
+================================ */
+
+.roster-shell {
+  padding: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.roster-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.roster-summary {
+  min-height: 52px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: #f8fafc;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+}
+
+.roster-summary span {
+  color: var(--color-dark);
+  font-weight: 900;
+}
+
+.roster-progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.roster-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transition: width 260ms ease;
+}
+
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.roster-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition),
+    background var(--transition);
+}
+
+.roster-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.roster-card.is-complete {
+  border-color: rgba(34, 197, 94, 0.42);
+  background: linear-gradient(180deg, #f0fdf4, #ffffff);
+}
+
+.roster-card--rest {
+  background: #f8fafc;
+}
+
+.roster-card-label {
+  position: relative;
+  min-height: 168px;
+  padding: 18px;
+  cursor: pointer;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 13px;
+}
+
+.roster-card input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.roster-check {
+  position: relative;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  transition:
+    border-color var(--transition),
+    background var(--transition);
+}
+
+.roster-check::after {
+  width: 8px;
+  height: 14px;
+  border-right: 3px solid #052e16;
+  border-bottom: 3px solid #052e16;
+  content: "";
+  opacity: 0;
+  transform: rotate(38deg) translate(-1px, -2px) scale(0.7);
+  transition:
+    opacity var(--transition),
+    transform var(--transition);
+}
+
+.roster-card input:checked + .roster-check {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+
+.roster-card input:checked + .roster-check::after {
+  opacity: 1;
+  transform: rotate(38deg) translate(-1px, -2px) scale(1);
+}
+
+.roster-card input:focus-visible + .roster-check {
+  outline: 3px solid rgba(6, 182, 212, 0.65);
+  outline-offset: 3px;
+}
+
+.roster-card-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.roster-day-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.roster-day-row span {
+  color: var(--color-primary-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.roster-day-row em {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #155e75;
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.roster-card-copy strong {
+  color: var(--color-dark);
+  font-size: 1rem;
+  line-height: 1.22;
+}
+
+.roster-card-copy > span:last-child {
+  margin-top: auto;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* ================================
+   Program
+================================ */
+
+.program-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-group label {
+  color: var(--color-dark);
+  font-weight: 800;
+}
+
+.select-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-white);
+  color: var(--color-dark);
+  outline: none;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.select-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.14);
+}
+
+.program-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.55fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.warmup-box,
+.workout-panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.warmup-box {
+  padding: 26px;
+  position: sticky;
+  top: 20px;
+}
+
+.warmup-box h3 {
+  margin-bottom: 8px;
+  font-size: 1.4rem;
+}
+
+.warmup-box p {
+  margin-bottom: 20px;
+  color: var(--color-muted);
+  font-size: 0.94rem;
+}
+
+.warmup-list {
+  display: grid;
+  gap: 10px;
+}
+
+.warmup-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.warmup-list li:last-child {
+  border-bottom: 0;
+}
+
+.warmup-list span {
+  color: var(--color-dark);
+  font-weight: 650;
+}
+
+.warmup-list strong {
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+}
+
+.workout-panel {
+  overflow: hidden;
+}
+
+.workout-header {
+  padding: 26px;
+  background:
+    radial-gradient(circle at top right, rgba(6, 182, 212, 0.22), transparent 32%),
+    linear-gradient(135deg, #020617, #102033);
+  color: var(--color-white);
+}
+
+.workout-header p {
+  color: var(--color-primary);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.workout-header h3 {
+  margin-top: 8px;
+  font-size: clamp(1.55rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.workout-header span {
+  display: block;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.workout-content {
+  padding: 26px;
+}
+
+.workout-block + .workout-block {
+  margin-top: 32px;
+}
+
+.workout-block h4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #0f172a;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+}
+
+.workout-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+.workout-table th {
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.82rem;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.workout-table th,
+.workout-table td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.workout-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.workout-table td {
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+.workout-table td:first-child {
+  color: var(--color-dark);
+  font-weight: 800;
+}
+
+.workout-table th:last-child,
+.workout-table td:last-child {
+  width: 150px;
+}
+
+.workout-table td:last-child {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.exercise-open-button,
+.demo-open-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.exercise-open-button {
+  padding: 0;
+  color: var(--color-dark);
+  font-weight: 900;
+  text-align: left;
+  transition: color var(--transition);
+}
+
+.exercise-open-button:hover {
+  color: var(--color-primary-dark);
+}
+
+.demo-open-button {
+  display: block;
+  padding: 0;
+  border-radius: 16px;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.demo-open-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.workout-table tr {
+  transition: background var(--transition);
+}
+
+.workout-table tr:hover td {
+  background: #f8fafc;
+}
+
+/* ================================
+   Exercise Detail Page
+================================ */
+
+body.is-detail-open {
+  overflow: hidden;
+}
+
+.exercise-detail-page[hidden] {
+  display: none;
+}
+
+.exercise-detail-page {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  padding: 28px;
+  background: rgba(2, 6, 23, 0.78);
+}
+
+.exercise-detail-backdrop {
+  position: fixed;
+  inset: 0;
+}
+
+.exercise-detail-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-lg);
+}
+
+.exercise-detail-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.detail-back-button,
+.video-control-row button,
+.timer-controls button,
+.exercise-detail-footer button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 900;
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    color var(--transition);
+}
+
+.detail-back-button {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.detail-back-button:hover,
+.video-control-row button:hover,
+.timer-controls button:hover,
+.exercise-detail-footer button:hover {
+  transform: translateY(-1px);
+}
+
+.exercise-detail-header p {
+  color: var(--color-primary-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exercise-detail-header h2 {
+  margin-top: 6px;
+  color: var(--color-dark);
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.exercise-detail-header span {
+  display: block;
+  margin-top: 12px;
+  color: var(--color-muted);
+  font-size: 1rem;
+}
+
+.exercise-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.exercise-video-panel,
+.exercise-timer-panel,
+.exercise-guide-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.exercise-video-panel {
+  overflow: hidden;
+}
+
+.exercise-detail-demo .demo-clip {
+  width: 100%;
+  height: clamp(320px, 48vw, 460px);
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.video-control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px;
+  border-top: 1px solid var(--color-border);
+  background: #f8fafc;
+}
+
+.video-control-row button {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.exercise-detail-page[data-demo-speed="slow"] .demo-clip * {
+  animation-duration: 2.4s !important;
+}
+
+.exercise-detail-page.is-demo-paused .demo-clip,
+.exercise-detail-page.is-demo-paused .demo-clip * {
+  animation-play-state: paused !important;
+}
+
+.exercise-timer-panel {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.timer-readout {
+  padding: 22px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top right, rgba(6, 182, 212, 0.18), transparent 38%),
+    linear-gradient(135deg, #020617, #111827);
+  color: var(--color-white);
+}
+
+.timer-readout span {
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.timer-readout strong {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(3rem, 8vw, 5.6rem);
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+
+.exercise-timer-progress {
+  height: 10px;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.exercise-timer-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transition: width 180ms linear;
+}
+
+.timer-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.timer-controls button:first-child {
+  background: var(--color-primary);
+  color: #001018;
+}
+
+.timer-controls button:nth-child(2) {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.timer-controls button:nth-child(3) {
+  background: var(--color-accent);
+  color: #02130a;
+}
+
+.set-tracker {
+  display: grid;
+  gap: 10px;
+}
+
+.set-tracker > span {
+  color: var(--color-dark);
+  font-weight: 900;
+}
+
+.set-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.set-dots span {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #e2e8f0;
+}
+
+.set-dots span.is-active {
+  background: var(--color-primary);
+}
+
+.set-dots span.is-complete {
+  background: var(--color-accent);
+}
+
+.exercise-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.exercise-meta-grid div {
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.exercise-meta-grid span {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exercise-meta-grid strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-dark);
+  line-height: 1.25;
+}
+
+.exercise-guide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.exercise-guide-card {
+  padding: 22px;
+}
+
+.exercise-guide-card h3 {
+  margin-bottom: 14px;
+  color: var(--color-dark);
+  font-size: 1.25rem;
+}
+
+.exercise-guide-card ul,
+.exercise-guide-card ol {
+  display: grid;
+  gap: 12px;
+  padding-left: 20px;
+}
+
+.exercise-guide-card li {
+  color: #334155;
+}
+
+.exercise-detail-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.exercise-detail-footer button {
+  background: #ecfeff;
+  color: #155e75;
+}
+
+.exercise-detail-footer button:last-child {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* ================================
+   Testing
+================================ */
+
+.testing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.test-card {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.test-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.test-card h3 {
+  margin-bottom: 10px;
+}
+
+.test-card p {
+  color: var(--color-muted);
+  font-size: 0.94rem;
+}
+
+/* ================================
+   Rules
+================================ */
+
+.rules-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.rules-card {
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.rules-card h3 {
+  margin-bottom: 20px;
+  font-size: 1.55rem;
+}
+
+.rule-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rule-row:last-child {
+  border-bottom: 0;
+}
+
+.rule-row span {
+  color: var(--color-muted);
+}
+
+.rule-row strong {
+  text-align: right;
+}
+
+.dark-card {
+  background:
+    radial-gradient(circle at top right, rgba(6, 182, 212, 0.18), transparent 35%),
+    linear-gradient(135deg, #020617, #111827);
+  color: var(--color-white);
+}
+
+.dark-card p {
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.muscle-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.muscle-tags span {
+  padding: 10px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ================================
+   Footer
+================================ */
+
+.site-footer {
+  padding: 28px 16px;
+  background: #020617;
+  color: rgba(255, 255, 255, 0.72);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.site-footer p {
+  font-weight: 800;
+}
+
+.site-footer a {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+/* ================================
+   JavaScript Reveal Animation
+================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.empty-state {
+  padding: 28px;
+  border: 1px dashed var(--color-border);
+  border-radius: 18px;
+  background: #f8fafc;
+}
+
+.empty-state h4 {
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+}
+
+.empty-state p {
+  color: var(--color-muted);
+}
+
+/* ================================
+   Accessibility
+================================ */
+
+:focus-visible {
+  outline: 3px solid rgba(6, 182, 212, 0.75);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ================================
+   Responsive Design
+================================ */
+
+@media (max-width: 1100px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .schedule-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .roster-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .program-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-detail-layout,
+  .exercise-guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .warmup-box {
+    position: static;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(2, 6, 23, 0.96);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .nav-menu.is-open {
+    display: flex;
+  }
+
+  .nav-menu a {
+    display: block;
+    padding: 14px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 52px;
+  }
+
+  .program-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .roster-toolbar,
+  .upcoming-now {
+    grid-template-columns: 1fr;
+  }
+
+  .clip-timer {
+    text-align: left;
+  }
+
+  .rules-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-detail-page {
+    padding: 14px;
+  }
+
+  .exercise-detail-shell {
+    padding: 20px;
+  }
+
+  .exercise-detail-header {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .overview-grid,
+  .schedule-grid,
+  .roster-grid,
+  .testing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rule-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .rule-row strong {
+    text-align: left;
+  }
+
+  .workout-content,
+  .workout-header,
+  .warmup-box {
+    padding: 20px;
+  }
+
+  .warmup-list li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .workout-table {
+    min-width: 900px;
+  }
+
+  .roster-shell {
+    padding: 18px;
+  }
+
+  .roster-card-label {
+    min-height: 140px;
+  }
+
+  .demo-clip--large {
+    height: 192px;
+  }
+
+  .exercise-detail-demo .demo-clip {
+    height: 300px;
+  }
+
+  .timer-controls,
+  .exercise-detail-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-controls,
+  .exercise-detail-footer,
+  .video-control-row {
+    display: grid;
+  }
+
+  .exercise-detail-footer {
+    justify-content: stretch;
+  }
+}

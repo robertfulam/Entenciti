@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Black running icon</title>
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="82" cy="20" r="12" fill="#000" stroke="none"/>
+    <path d="M72 40 55 57 35 59" stroke-width="12"/>
+    <path d="M70 42 91 56 109 48" stroke-width="11"/>
+    <path d="M58 58 76 77 68 111" stroke-width="13"/>
+    <path d="M60 62 39 88 16 96" stroke-width="13"/>
+    <path d="M75 78 99 87 114 109" stroke-width="13"/>
+  </g>
+</svg>

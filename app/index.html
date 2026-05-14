@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="An 8-week football speed training program designed to improve acceleration, top speed, strength, explosiveness, agility, core strength, Achilles tendon stiffness, and hip abductor stability."
+  />
+
+  <meta
+    name="keywords"
+    content="speed training, football speed, acceleration, sprint workout, Mbappe speed, core training, Achilles tendon, hip abductors, strength training, agility program"
+  />
+
+  <meta name="author" content="INTENCITI" />
+
+  <title>INTENCITI | 8-Week Speed Program</title>
+
+  <link rel="icon" href="../images/running-icon.svg" type="image/svg+xml" sizes="any" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../styles/styles.css" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <header class="site-header" id="top">
+    <nav class="navbar">
+      <a href="#top" class="brand" aria-label="ENTENCITI Home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="../images/running-icon.svg" alt="" />
+        </span>
+        <span class="brand-text">ENTENCITI</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu" data-nav-menu>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#roster">Roster</a></li>
+        <li><a href="#program">Program</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#rules">Rules</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">8-Week Football Speed Program</p>
+
+        <h1>
+          Build explosive speed, acceleration, and game-changing sprint power.
+        </h1>
+
+        <p class="hero-description">
+          A complete two-month training system designed for a 24-year-old,
+          172 cm, 61 kg athlete aiming to improve football speed, top-end
+          sprinting, agility, lower-body power, core strength, Achilles tendon
+          stiffness, and hip abductor control.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#program" class="btn btn-primary">View Program</a>
+          <a href="#roster" class="btn btn-secondary">Open Roster</a>
+        </div>
+      </div>
+
+      <div class="hero-card upcoming-card" aria-label="Upcoming training preview">
+        <div class="hero-card-header">
+          <p>Upcoming Program</p>
+          <span id="upcomingEnvironment">Field + Gym</span>
+        </div>
+
+        <div class="home-video" id="homeDemoClip" aria-live="polite">
+          <!-- JavaScript will inject the rotating demo clip here -->
+        </div>
+
+        <div class="upcoming-details">
+          <p id="upcomingPhase">Week 1 - Monday</p>
+          <h2 id="upcomingTitle">Acceleration + Strength + Achilles</h2>
+          <span id="upcomingFocus">
+            Technique, posture, tendon strength, core control, and hip stability
+          </span>
+        </div>
+
+        <div class="upcoming-now">
+          <div>
+            <span>Now Showing</span>
+            <strong id="upcomingExercise">10 m sprint</strong>
+          </div>
+
+          <div class="clip-timer" aria-label="Current clip timer">
+            <span id="upcomingTimer">00:08</span>
+            <div class="timer-bar" aria-hidden="true">
+              <span data-video-progress></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card-footer upcoming-actions">
+          <button class="quick-check-button" type="button" data-home-complete>
+            Check Session
+          </button>
+          <a href="#program">View workout</a>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section" id="overview">
+      <div class="section-heading">
+        <p class="eyebrow">Program Overview</p>
+        <h2>Train like a speed athlete, not just a gym athlete.</h2>
+        <p>
+          This program combines sprinting, plyometrics, lower-body strength,
+          tendon stiffness, hip power, core stability, hip abductor control,
+          and football-specific agility.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+        <article class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Acceleration</h3>
+          <p>
+            Short sprints, hill sprints, resisted runs, and first-step drills
+            build explosive takeoff speed.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🏃</div>
+          <h3>Top Speed</h3>
+          <p>
+            Flying sprints, sprint mechanics, and full recovery help improve
+            maximum velocity.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🏋️</div>
+          <h3>Strength</h3>
+          <p>
+            Squats, deadlifts, hip thrusts, calf raises, and Nordics build the
+            force needed for speed.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🦵</div>
+          <h3>Achilles Tendon</h3>
+          <p>
+            Calf raises, isometric holds, pogos, and elastic jumps improve
+            ankle stiffness and ground contact speed.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🧱</div>
+          <h3>Core Stability</h3>
+          <p>
+            Anti-rotation, planks, carries, and trunk control help transfer
+            force without wasting movement.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">↔️</div>
+          <h3>Hip Abductors</h3>
+          <p>
+            Lateral band walks, cable abductions, and side plank variations
+            improve pelvis control and cutting stability.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🔁</div>
+          <h3>Agility</h3>
+          <p>
+            Shuttle runs, reaction sprints, curved runs, and ball sprints build
+            football-specific movement.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Injury Resistance</h3>
+          <p>
+            Hamstring, groin, Achilles, core, and hip stability work reduce
+            common sprint-related weak links.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="schedule">
+      <div class="section-heading">
+        <p class="eyebrow">Weekly Schedule</p>
+        <h2>Your updated weekly training structure</h2>
+        <p>
+          The week is organized to balance sprint quality, strength development,
+          core stability, Achilles tendon loading, hip abductor strength, and recovery.
+        </p>
+      </div>
+
+      <div class="schedule-grid">
+        <article class="day-card">
+          <span>Monday</span>
+          <h3>Acceleration + Strength + Achilles</h3>
+          <p>
+            Short sprints, hill work, squats, RDLs, hip thrusts, calf and
+            Achilles work.
+          </p>
+        </article>
+
+        <article class="day-card">
+          <span>Tuesday</span>
+          <h3>Core + Mobility + Hip Abductors</h3>
+          <p>
+            Core stability, hip control, glute medius, groin balance, and
+            tibialis work.
+          </p>
+        </article>
+
+        <article class="day-card">
+          <span>Wednesday</span>
+          <h3>Max Speed + Plyometrics + Achilles</h3>
+          <p>
+            Flying sprints, pogos, bounds, jumps, ankle stiffness, and tendon
+            reactivity.
+          </p>
+        </article>
+
+        <article class="day-card">
+          <span>Thursday</span>
+          <h3>Recovery + Light Core</h3>
+          <p>
+            Rest, mobility, breathing work, light trunk stability, and easy
+            ball work.
+          </p>
+        </article>
+
+        <article class="day-card">
+          <span>Friday</span>
+          <h3>Strength + Power + Core</h3>
+          <p>
+            Deadlifts, front squats, power cleans, Nordics, carries, and trunk
+            stiffness.
+          </p>
+        </article>
+
+        <article class="day-card">
+          <span>Saturday</span>
+          <h3>Football Speed + Abductors</h3>
+          <p>
+            Reaction sprints, shuttles, curved runs, ball sprints, and lateral
+            hip strength.
+          </p>
+        </article>
+
+        <article class="day-card">
+          <span>Sunday</span>
+          <h3>Rest</h3>
+          <p>
+            Full recovery to allow your body to adapt, rebuild, and get faster.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="roster">
+      <div class="section-heading">
+        <p class="eyebrow">Training Roster</p>
+        <h2>Check off every gym and field session.</h2>
+        <p>
+          Keep a simple weekly record of your acceleration, strength, mobility,
+          max-speed, power, and football-speed days.
+        </p>
+      </div>
+
+      <div class="roster-shell">
+        <div class="roster-toolbar">
+          <div class="control-group">
+            <label for="rosterWeekSelect">Roster Week</label>
+            <select id="rosterWeekSelect" class="select-input">
+              <option value="1">Week 1</option>
+              <option value="2">Week 2</option>
+              <option value="3">Week 3</option>
+              <option value="4">Week 4</option>
+              <option value="5">Week 5</option>
+              <option value="6">Week 6</option>
+              <option value="7">Week 7</option>
+              <option value="8">Week 8</option>
+            </select>
+          </div>
+
+          <div class="roster-summary" aria-live="polite">
+            <span id="rosterProgressLabel">0 of 5 sessions complete</span>
+            <div class="roster-progress" aria-hidden="true">
+              <span id="rosterProgressBar"></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="rosterGrid" class="roster-grid">
+          <!-- JavaScript will inject roster cards here -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="section-heading">
+        <p class="eyebrow">Workout Program</p>
+        <h2>8-week interactive training plan</h2>
+        <p>
+          Select a training phase and day to view the workout, including
+          exercises, sets, reps, weights, rest periods, and coaching notes.
+        </p>
+      </div>
+
+      <div class="program-controls">
+        <div class="control-group">
+          <label for="phaseSelect">Select Phase</label>
+          <select id="phaseSelect" class="select-input">
+            <option value="weeks1_2">Weeks 1–2: Foundation</option>
+            <option value="weeks3_4">Weeks 3–4: Strength + Acceleration</option>
+            <option value="weeks5_6">Weeks 5–6: Max Speed + Power</option>
+            <option value="weeks7_8">Weeks 7–8: Peak Speed</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="daySelect">Select Day</label>
+          <select id="daySelect" class="select-input">
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="friday">Friday</option>
+            <option value="saturday">Saturday</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="program-layout">
+        <aside class="warmup-box">
+          <h3>Every Session Warm-Up</h3>
+          <p>
+            Complete this warm-up before sprinting or lifting. It prepares your
+            hips, hamstrings, calves, Achilles tendon, ankles, trunk, and
+            nervous system.
+          </p>
+
+          <ul class="warmup-list">
+            <li><span>Light jog</span><strong>5 min</strong></li>
+            <li><span>Leg swings front/back</span><strong>2 × 10 each</strong></li>
+            <li><span>Leg swings side/side</span><strong>2 × 10 each</strong></li>
+            <li><span>Walking lunges</span><strong>2 × 10 each</strong></li>
+            <li><span>A-skips</span><strong>2 × 20 m</strong></li>
+            <li><span>High knees</span><strong>2 × 20 m</strong></li>
+            <li><span>Butt kicks</span><strong>2 × 20 m</strong></li>
+            <li><span>Ankling / pogos</span><strong>2 × 20 m</strong></li>
+            <li><span>Lateral band walk</span><strong>1 × 10 each side</strong></li>
+            <li><span>Dead bug activation</span><strong>1 × 8 each side</strong></li>
+            <li><span>60% sprint build-up</span><strong>2 × 30 m</strong></li>
+            <li><span>80% sprint build-up</span><strong>2 × 30 m</strong></li>
+          </ul>
+        </aside>
+
+        <section class="workout-panel">
+          <div class="workout-header">
+            <p id="phaseLabel">Weeks 1–2</p>
+            <h3 id="workoutTitle">Monday — Acceleration + Strength + Achilles</h3>
+            <span id="workoutFocus">
+              Technique, posture, tendon strength, core control, and hip stability
+            </span>
+          </div>
+
+          <div id="workoutContent" class="workout-content">
+            <!-- JavaScript will inject workout tables here -->
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section
+      class="exercise-detail-page"
+      id="exerciseDetailPage"
+      aria-labelledby="exerciseDetailTitle"
+      hidden
+    >
+      <div class="exercise-detail-backdrop" data-exercise-close></div>
+
+      <article class="exercise-detail-shell" role="dialog" aria-modal="true">
+        <header class="exercise-detail-header">
+          <button class="detail-back-button" type="button" data-exercise-close>
+            Back
+          </button>
+
+          <div>
+            <p id="exerciseDetailContext">Workout detail</p>
+            <h2 id="exerciseDetailTitle">Exercise</h2>
+            <span id="exerciseDetailSubtitle">Sets, load, and coaching focus</span>
+          </div>
+        </header>
+
+        <div class="exercise-detail-layout">
+          <section class="exercise-video-panel" aria-label="Follow-along exercise clip">
+            <div id="exerciseDetailDemo" class="exercise-detail-demo">
+              <!-- JavaScript will inject the detailed follow-along clip here -->
+            </div>
+
+            <div class="video-control-row">
+              <button type="button" data-demo-toggle>Pause Clip</button>
+              <button type="button" data-demo-speed="slow">Slow</button>
+              <button type="button" data-demo-speed="normal">Normal</button>
+            </div>
+          </section>
+
+          <aside class="exercise-timer-panel">
+            <div class="timer-readout">
+              <span id="exerciseTimerLabel">Work Timer</span>
+              <strong id="exerciseTimerDisplay">00:30</strong>
+              <div class="exercise-timer-progress" aria-hidden="true">
+                <span id="exerciseTimerProgress"></span>
+              </div>
+            </div>
+
+            <div class="timer-controls">
+              <button type="button" data-timer-start>Start</button>
+              <button type="button" data-timer-reset>Reset</button>
+              <button type="button" data-set-complete>Set Done</button>
+            </div>
+
+            <div class="set-tracker">
+              <span id="exerciseSetLabel">Set 1 of 1</span>
+              <div id="exerciseSetDots" class="set-dots" aria-hidden="true"></div>
+            </div>
+
+            <div class="exercise-meta-grid">
+              <div>
+                <span>Volume</span>
+                <strong id="exerciseDetailVolume">--</strong>
+              </div>
+
+              <div>
+                <span>Load / Rest</span>
+                <strong id="exerciseDetailLoad">--</strong>
+              </div>
+
+              <div>
+                <span>Suggested Rest</span>
+                <strong id="exerciseDetailRest">--</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="exercise-guide-grid">
+          <section class="exercise-guide-card">
+            <h3>Coaching Cues</h3>
+            <ul id="exerciseDetailCues"></ul>
+          </section>
+
+          <section class="exercise-guide-card">
+            <h3>Follow Along</h3>
+            <ol id="exerciseDetailSteps"></ol>
+          </section>
+        </div>
+
+        <footer class="exercise-detail-footer">
+          <button type="button" data-exercise-prev>Previous Exercise</button>
+          <button type="button" data-exercise-next>Next Exercise</button>
+        </footer>
+      </article>
+    </section>
+
+    <section class="section section-alt" id="testing">
+      <div class="section-heading">
+        <p class="eyebrow">Testing Progress</p>
+        <h2>Measure your speed before and after the program</h2>
+        <p>
+          Test in Week 0 before starting, then repeat after Week 8. Use the same
+          surface, shoes, and timing method.
+        </p>
+      </div>
+
+      <div class="testing-grid">
+        <article class="test-card">
+          <h3>10 m Sprint</h3>
+          <p>Measures first-step explosion and early acceleration.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>30 m Sprint</h3>
+          <p>Measures football burst speed and acceleration power.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>Flying 20 m</h3>
+          <p>Measures top speed once already moving.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>Broad Jump</h3>
+          <p>Measures horizontal lower-body power.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>5-10-5 Shuttle</h3>
+          <p>Measures change of direction and re-acceleration.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>Single-Leg Balance Reach</h3>
+          <p>Measures hip abductor control, knee control, and pelvis stability.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>Pogo Contact Quality</h3>
+          <p>Measures Achilles stiffness, ankle reactivity, and elastic bounce.</p>
+        </article>
+
+        <article class="test-card">
+          <h3>Core Hold Test</h3>
+          <p>Measures trunk stiffness and ability to maintain sprint posture.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="rules">
+      <div class="section-heading">
+        <p class="eyebrow">Training Rules</p>
+        <h2>Progress safely and stay explosive</h2>
+      </div>
+
+      <div class="rules-layout">
+        <article class="rules-card">
+          <h3>Weight Progression</h3>
+
+          <div class="rule-row">
+            <span>Too easy</span>
+            <strong>Add 2.5–5 kg next session</strong>
+          </div>
+
+          <div class="rule-row">
+            <span>Good but challenging</span>
+            <strong>Keep the same weight</strong>
+          </div>
+
+          <div class="rule-row">
+            <span>Form breaks</span>
+            <strong>Reduce 5–10 kg</strong>
+          </div>
+
+          <div class="rule-row">
+            <span>Pain or sharp tightness</span>
+            <strong>Stop the exercise</strong>
+          </div>
+        </article>
+
+        <article class="rules-card dark-card">
+          <h3>Speed Priorities</h3>
+
+          <div class="muscle-tags">
+            <span>Glutes</span>
+            <span>Hamstrings</span>
+            <span>Calves</span>
+            <span>Achilles Tendon</span>
+            <span>Hip Flexors</span>
+            <span>Quads</span>
+            <span>Core</span>
+            <span>Hip Abductors</span>
+            <span>Adductors</span>
+            <span>Tibialis</span>
+          </div>
+
+          <p>
+            Do not chase fatigue. Sprint quality matters more than doing more
+            reps. Stop if your hamstrings, Achilles, groin, knees, hips, or
+            lower back feel unsafe.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>ENTENCITI Speed Program</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="./script.js"></script>
+</body>
+</html>
